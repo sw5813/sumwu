@@ -1,1 +1,4 @@
 gunicorn==19.0.0
+jinja2
+werkzeug
+flask
