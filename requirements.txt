@@ -5,3 +5,4 @@ Werkzeug==0.9.6
 gspread==0.2.2
 itsdangerous==0.24
 wsgiref==0.1.2
+gunicorn==19.0.0
