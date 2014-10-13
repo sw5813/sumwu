@@ -1,4 +1,4 @@
-personal site and project playground
+personal site/project playground
 ====================
 
 ### To run locally:

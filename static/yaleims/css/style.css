@@ -15,33 +15,48 @@ a:hover {
 
 html,
 body {
-  background-image: url(../img/background.jpg);
+  background: url(../img/background.jpg) no-repeat top left fixed; 
+  background-size: cover;
   font-family: 'Montserrat', sans-serif;
+  margin-top: -10px;
+  padding-top: 12px;
+  height: 115%;
 }
 body {
   color: #fff;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  text-shadow: 0 1px 3px rgba(0,0,0,.8);
   box-shadow: inset 0 0 100px rgba(0,0,0,.5);
 }
 
+/* title text */
+#title {
+  display: inline-block;
+  margin-top: 10px;
+  padding-bottom: 30px;
+}
 h1 {
   font-size: 40px;
 }
-.lead {
-  font-size: 22px;
+h2 {
+  font-size: 16px;
 }
 
 /* logo */
 #logo {
-  position: absolute;
+  vertical-align: top;
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: -20px;
   left: 10px;
+  height: 120px;
 }
 
 /* social media icons */
 .social {
-    width: calc(50% + 86px);
     height: 48px;
+    margin-right: 20px;
+    margin-bottom: 40px;
 }
 .social-popout {
   height: 48px;
@@ -70,6 +85,13 @@ h1 {
   box-shadow: 6px 6px 4px 4px rgba(0,0,0,0.3);
 }
 
+#footer {
+  position: absolute;
+  bottom: -175px;
+  width: 100%;
+  text-align: center;
+}
+
 /* Extra small devices (phones, less than 768px) */
 /* No media query since this is the default in Bootstrap */
 
@@ -78,22 +100,28 @@ h1 {
   h1 {
     font-size: 48px;
   }
+  h2 {
+    font-size: 18px;
+  }
+  #logo {
+    height: 150px;
+    margin-top: 0;
+  }
 }
 
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+  body {
+    background-size: cover;
+  }
   h1 {
     font-size: 64px;
   }
-  .cover {
-    margin-left: 320px;
-    margin-right: -170px;
+  h2 {
+    font-size: 24px;
   }
-  .social {
-    width: calc(100%);
-  }
-  body {
-    background-size: cover;
+  #logo {
+    height: 180px;
   }
 }
 
@@ -101,5 +129,11 @@ h1 {
 @media (min-width: 1200px) {
   h1 {
     font-size: 80px;
+  }
+  h2 {
+    font-size: 30px;
+  }
+  #logo {
+    height: 200px;
   }
 }
