@@ -15,12 +15,11 @@ a:hover {
 
 html,
 body {
-  background: url(../img/background.jpg) no-repeat top left fixed; 
+  background: url(../img/background.jpg), no-repeat, top, left, fixed; 
   background-size: cover;
   font-family: 'Montserrat', sans-serif;
   margin-top: -10px;
   padding-top: 12px;
-  height: 115%;
 }
 body {
   color: #fff;
@@ -33,7 +32,7 @@ body {
 #title {
   display: inline-block;
   margin-top: 10px;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 h1 {
   font-size: 40px;
@@ -52,17 +51,60 @@ h2 {
   height: 120px;
 }
 
-/* social media icons */
+/* NAVBAR */
+.transparent {
+  background: rgba(0,0,0,0.4);
+  border: 0;
+}
+/* center the links */
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+.navbar .nav > li > a {
+    float: none;
+    text-decoration: none;
+    color:  #fff;
+}
+.navbar .nav > li > a:hover {
+    color:  #ccc;
+}
+.inverse-dropdown{
+  background-color: #222;
+  border-color: #080808;  
+}
+.inverse-dropdown > li > a {
+  color: #fff;
+}
+.inverse-dropdown > li > a:hover {
+  color: #ccc;
+  background-color: #000;
+}
+
+/* main content */
+table {
+  background-color: rgba(0,0,0,0.1);
+}
+
+/* footer and social media icons */
+#footer {
+  position: absolute;
+  height: 0;
+  width: 100%;
+  text-align: center;
+}
 .social {
-    height: 48px;
-    margin-right: 20px;
-    margin-bottom: 40px;
+  width: 50%;
+  height: 54px;
+  margin-bottom: 20px;
 }
 .social-popout {
   height: 48px;
   width: 48px;
-  margin: 10px;
-  float: right;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
   -webkit-transition: all ease 0.5s;
   -moz-transition: all ease 0.5s;
   -o-transition: all ease 0.5s;
@@ -83,13 +125,6 @@ h2 {
 .social-popout img:hover {
   margin: 0px;
   box-shadow: 6px 6px 4px 4px rgba(0,0,0,0.3);
-}
-
-#footer {
-  position: absolute;
-  bottom: -175px;
-  width: 100%;
-  text-align: center;
 }
 
 /* Extra small devices (phones, less than 768px) */
