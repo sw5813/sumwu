@@ -43,13 +43,17 @@
             <h1 class="cover-heading">Summer Wu</h1>
             <p class="lead">Student at Yale University</p>
             <hr>
-            <p>I'm planning to major in Computer Science.
-              <br><br>I like making things; I only wish I had a time turner so I can get through all my ideas!
-              <br><br>I enjoy exploring new places, ideas, and cultures, through experiencing, reading/writing, and discussing.
+
+            <h4>About Me</h4>
+              <p>I love making things and am fascinated by technology; some of my side projects include playing around with Google Cardboard, 3D printing, and revamping this site (using Flask). I dream big, explore wide, and enjoy meeting people with different experiences than mine. I hope to leave the world a better place than I found it.</p>
+            <h4>Current Projects</h4>
+            <p><a href="https://play.google.com/store/apps/details?id=com.dropdot.dropdotpro" class="project"><img src="{{ url_for('static', filename='img/dropdot.ico') }}" /> Dropdot</a>- a connect-the-dots game and puzzle creation interface
+              <br><a href="https://github.com/sw5813/heartbeat" class="project"><img src="{{ url_for('static', filename='img/heartbeat.ico') }}" /> Heartbeat</a>- dynamically generate playlists based on workout pace
               <!-- <br><br>I dream of making the world a better place.-->
-              <br><br>Projects coming soon!</p>
+              <br><a href="http://www.sumwu.me/yaleims" class="project"><img src="{{ url_for('static', filename='yaleims/img/yalefavicon.ico') }}" /> Yale Intramurals</a>- redesigning the Yale Intramurals site</p>
+
       <hr>
-      <a href="https://play.google.com/store/apps/details?id=com.dropdot.dropdotpro"><img src="{{ url_for('static', filename='img/dropdot.ico') }}" /> Get Dropdot!</a>
+      <a href="{{ url_for('static', filename='summer_wu_resume.pdf') }}"> &#10095; Resume (pdf)</a>
           </div>
     
     <div class="social">
