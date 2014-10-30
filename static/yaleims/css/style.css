@@ -36,9 +36,11 @@ body {
 }
 h1 {
   font-size: 40px;
+  font-family: 'Kameron', serif;
 }
 h2 {
   font-size: 16px;
+  font-family: 'Kameron', serif;
 }
 
 /* logo */
@@ -70,7 +72,7 @@ h2 {
 .navbar .nav > li > a:hover {
     color:  #ccc;
 }
-.inverse-dropdown{
+.inverse-dropdown {
   background-color: #222;
   border-color: #080808;  
 }
@@ -84,11 +86,12 @@ h2 {
 
 /* main content */
 table {
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0,0,0,0.2);
 }
 
 /* footer and social media icons */
 #footer {
+  background-color: rgba(0,0,0,0);
   position: absolute;
   height: 0;
   width: 100%;
