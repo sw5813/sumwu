@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Habit Map</title>
+		<script type="text/javascript" src="d3/d3.min.js"></script>
+		<style type="text/css">
+			.axis line {
+				stroke: none;
+                stroke-width: 0;    
+				shape-rendering: crispEdges;
+			}
+			.axis text {
+				font-family: sans-serif;
+				font-size: 12px;
+                color: #8CC152;
+			}
+            div.tooltip {   
+              position: absolute;           
+              text-align: center;           
+              width: 60px;                  
+              height: 25px;                 
+              padding: 4px;             
+              font: 13px sans-serif; 
+              color: white;
+              background: #3A4B9F;   
+              border: 0px;      
+              border-radius: 10px;           
+              pointer-events: none;         
+            }
+
+            
+		</style>
+	</head>
+	<body>
+        <script>
+            //read in json data = day, habit, isDone (-1 if n/a, 0 if not done, 1 if done), habitNum
+            d3.json("habits4.json", function(json) {
+              var dataset = json; 
+              function cell_dim(total, cells) { return Math.floor(total/cells) };//computes cell dimensions
+              var padding = 50; 
+              var total_height = 2*padding + 25*d3.max(dataset, function(d){return d.habitNum;}); //height scales w/ habits
+              var total_width = 500;
+              
+             //calculate # of columns and rows, dimensions    
+              var cols = d3.max(dataset, function(d){return d.day;}); 
+              var rows = d3.max(dataset, function(d){return d.habitNum;});    
+              var row_height = cell_dim(total_height-2*padding, rows);
+              var col_width = cell_dim(total_width-2*padding, cols);
+                
+                //define x and y axis for labels
+                var x = d3.scale.linear()
+                    .range([padding, total_width-padding]);
+
+                var y = d3.scale.linear()
+                    .range([padding, total_height-padding]);
+
+                var xAxis = d3.svg.axis()
+                    .scale(x)
+                    .orient("left")
+                    .ticks(0);
+
+                var yAxis = d3.svg.axis()
+                    .scale(y)
+                    .orient("left");
+                
+              //define color chart svg
+              var color_chart = d3.select("body")
+                                  .append("svg")
+                                  .attr("class", "chart")
+                                  .attr("width", padding*2+col_width * cols)
+                                  .attr("height", padding*2+row_height * rows);
+                //append x and y axis labels
+                color_chart.append("g")
+                    .attr("class", "y axis")
+                    .call(yAxis)
+                  .append("text")
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", padding/2)
+                    .attr("x", -total_height/2 + padding/2)
+                    .attr("dy", ".71em")
+                    .style("text-anchor", "end")
+                    .text("HABITS");
+                
+                 color_chart.append("g")
+                    .attr("class", "x axis")
+                    .call(xAxis)
+                  .append("text")
+                    .attr("x", total_width/2 + padding/4)
+                    .attr("y", padding/2)
+                    .attr("dy", ".71em")
+                    .style("text-anchor", "end")
+                    .text("DAYS");
+
+              //create div for mouseover
+              var div = d3.select("body").append("div")   
+                        .attr("class", "tooltip")               
+                        .style("opacity", 0);
+                
+              //color scale    
+              var color = d3.scale.quantile()
+                            .domain([-1,0,1])
+                            .range(["#B2B3B3", "#E9573F","#58C4C0"]);
+           
+              //create calendar bar chart
+              color_chart.selectAll("rect")
+                        .data(dataset)
+                        .enter()
+                        .append("rect")
+                        .attr("x", function(d) { return padding+ (d.day-1) * col_width; })
+                        .attr("y", function(d) { return padding + (d.habitNum-1) * row_height; })
+                        .attr("width", col_width)
+                        .attr("height", row_height)
+                        .attr("fill", function(d){return color(d.isDone)})
+                        .attr("opacity", 1)
+                        .attr("stroke-width", 1)
+                        .attr("stroke", "white")
+                        .on("mouseover", function(d) {
+                            d3.select(this).attr("opacity", 0.5)
+                            div.transition()        
+                                .duration(200)      
+                                .style("opacity", .7);      
+                            div.html(d.habit + " DAY#" + d.day)  
+                                .style("left", (d3.event.pageX) + "px")     
+                                .style("top", (d3.event.pageY - 28) + "px");    
+                        })                  
+                        .on("mouseout", function(d) {
+                            d3.select(this).attr("opacity", 1)
+                            div.transition()        
+                                .duration(500)      
+                                .style("opacity", 0);   
+                        });
+                        
+            })
+</script>
+
+
+
+	</body>
+</html>
+
+

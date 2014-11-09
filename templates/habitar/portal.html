@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>habitar: little habits, big dreams</title>
+  <meta name="description" content="Bare Bones">
+  <meta name="author" content="Team Masc">
+  <meta name="keywords" content="habitar">
+  <link rel="shortcut icon" href="http://faviconist.com/icons/473c4e20334fa779dd925f5a38e77c89/favicon.ico" />
+  <!-- Mobile Viewport Optimized-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- Bootstrap CSS: 3.2 -->
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.19.3/css/semantic.min.css" rel="stylesheet">
+   <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
+  <link href="habitar.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+
+<!-- StickyFooter Formatting. Current Footer height = 4em-->
+<style>
+	* {
+		margin: 0;
+	}
+	html, body {
+		height: 100%;
+	}
+	.wrapper {
+		min-height: 100%;
+		height: auto !important;
+		height: 100%;
+		margin: 0 auto -0;
+     /* background-image: url('assets/img/subwaves.png'); */
+     background-color:#A4Dbde;
+	}
+	.footer, .push {
+		min-height: 30px;
+	}
+
+  #sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+
+  /* #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.2em; height: 25px; } */
+
+  #sortable li span { position: absolute; margin-left: -1.3em; }
+
+  #add label, #add .ui.button, #settings label, #settings .title, #settings .ui.button{
+        font-size:16px;
+
+
+  }
+
+     /* #stats .axis line {
+        stroke: none;
+                stroke-width: 0;    
+        shape-rendering: crispEdges;
+      }
+      #stats .axis text {
+        font-family: sans-serif;
+        font-size: 11px;
+                color: #8CC152;
+      }
+       #stats div.tooltip {   
+              position: absolute;           
+              text-align: center;           
+              width: 60px;                  
+              height: 25px;                 
+              padding: 4px;             
+              font: 10px sans-serif; 
+              color: white;
+              background: #3A4B9F;   
+              border: 0px;      
+              border-radius: 10px;           
+              pointer-events: none;         
+            } */
+
+
+</style>
+
+
+ 
+
+
+</head>
+<body>
+
+<div class="wrapper">
+
+
+  <div class="nav-controller">
+    <span class="[ glyphicon glyphicon-chevron-down ] controller-open"></span>
+    <span class=" controller-close"></span>
+</div>
+
+
+<nav class="animate">
+    <ul class="mainmenu">
+      <li>
+            <a data-toggle="modal" href="#settings">settings</a>
+        </li>
+        <li>
+            <a href="#add">add task</a>
+        </li>
+        <li>
+            <a href="#stats">statistics</a>
+        </li>
+        <li>
+            <a href="home">logout</a>
+        </li>
+
+        <li> Age:
+            <select data-bind="options: creatureAge, value: selAge" ></select>
+        </li>
+
+      <li> Mood:
+            <select data-bind="options: creatureMood, value: selMood" ></select>
+      </li>
+
+      <li> Enviro:
+            <select data-bind="options: grounds, value: selGround" ></select>
+      </li>
+
+     <li class = "btn btn-default" onClick="urlChange()" >  Update Picture
+     </li>
+             </ul>
+
+        <div class="imagebox" style="padding-right:38px">
+            <a href="index.html"><img src="assets/logo/icogo_c.png" style="height:100px; " ></a>
+            <h4 style="padding-right:5px;font-family:Raleway">habitar</h4>
+        </div>
+
+
+</nav>
+
+
+	<div class="container" id="main">
+  <div class="row" style="padding-top:50px"> 
+    <div class="col-md-6">
+      <div class="creature vert-center"  style="display:none">
+          <img class="img-responsive bobbing" src='assets/img/habitar.png'>
+      </div>
+
+      <div id="creatureBox">
+          <iframe id="iFrameSrc" data-bind="src: iString" width="400" height="450" frameborder="0"></iframe>
+      </div>
+
+      <div >
+          <img id = "imgGround" class="img-responsive" src='assets/img/grass.png' style="margin-right:50px;width:75%; margin-top:-90px">
+      </div>
+    
+    </div>
+    
+      <div class="col-md-6 tasks">
+        <div class="vert-center">
+            <div class="datebox">
+            <span id ="leftArrow" class="glyphicon glyphicon-chevron-left arrow" onclick="alert('go back a day')"> </span>
+              Friday, October 31
+              <span id ="rightArrow"class="glyphicon glyphicon-chevron-right arrow" onclick="alert('go ahead a day')"> </span>
+            </div>
+
+            <ul id="sortTasks">
+              <div class="btn btn-daily taskBox" id="box1"> 
+
+                <label for="item1"><span id="my_span1">This is an essential task. Remember to eat your carrots! </span></label>
+                <input type="checkbox" id="ckb1" name="task1" value="true" onclick="my_fun(1)"> 
+
+              </div> 
+              <div class="btn btn-daily taskBox" id="box2"><label for="item2"><span id="my_span2">This is an essential task. Remember to eat your potatos! </span></label>  <input type="checkbox" id="ckb2" name="item2" value="true" onclick="my_fun(2)"> </div>
+              <div class="btn btn-default taskBox" id="box3"><label for="item3"><span id="my_span3">This is a sample task. Remember to eat your spinach! </span> </label> <input type="checkbox" id="ckb3" name="item3" value="true" onclick="my_fun(3)"> </div>
+              <div class="btn btn-default taskBox" id="box4"><label for="item4"><span id="my_span4">This is a sample task. Remember to eat your broccoli! </span></label>  <input type="checkbox" id="ckb4" name="item4" value="true" onclick="my_fun(4)"> </div>
+              <div class="btn btn-default taskBox" id="box5"><label for="item5"><span id="my_span5">This is a sample task. Remember to eat your tomatos! </span></label>  <input type="checkbox" id="ckb5" name="item5" value="true" onclick="my_fun(5)"> </div>
+              <div class="btn btn-add taskBox" style="text-align:center" ><label for="item6"> Mood: <span data-bind="text:selMood" ></span>  <span id="goTeam"></span></label> </div>
+              
+              <div class="btn btn-default taskBox" id="quotebox" style="display:none; height:300px">
+                <p>Well done! You've finished :) What's next?</p> <br>
+
+                <i class="fa fa-gear fa-lg" style="font-size:40px;margin-top:40px"> </i> <br>
+
+
+
+                   </div>
+
+
+
+              <span id="my_span6"></span> <span id="iStringLabel" data-bind="text:iString" onchange="urlChange()" style="display:none">assets/moods/egg_content/index.html</span>
+
+              <span id="lblGround" data-bind="text:selGround" onchange="urlChange()" style="display:none">assets/img/grass.png</span>
+           </ul><!-- end sortTasks-->
+
+          <div class="launchbar" style="margin-top:35px;float:right">
+              <a href="#add" data-toggle="modal" ><i class="fa fa-plus fa-3x"></i>
+              <a href="#stats" data-toggle="modal" ><i class="fa fa-bar-chart fa-3x"></i>
+              <a href="#mood" data-toggle="modal" ><i class="fa fa-heart-o fa-3x"></i>
+          </div>
+
+          </div> <!-- end vert-->
+
+         
+
+        </div> <!-- end col -->
+      </div> <!-- end row -->
+    </div> <!-- end container-->
+
+
+      <div class="push"></div>
+   </div><!-- end wrapper-->
+
+<div class="footer">
+	<div class="container">
+      <div class="row">
+        <div class="col-xs-4">
+          <div style="text-align:left">
+              <p class="footlist">
+
+                <a data-toggle="modal" href="index.html" > <strong>habit</strong>ar</a>  
+                <a data-toggle="modal" href="#about" > about </a>  |  
+                <a data-toggle="modal" href="#contact"> contact </a> |  
+
+ <a href="#"> <i class="fa fa-twitter fa-lg"></i> </a> 
+
+ <a href="#"> <i class="fa fa-facebook-square fa-lg"></i> </a> 
+
+</p>
+          </div><!-- end align right-->
+
+        </div><!-- end left col-md-4 -->
+        <div class="col-xs-4">
+          <div style="text-align:center">
+              <p>   
+                  habitar: big dreams, little habits
+              </p>
+            </div><!-- end align center-->
+        </div><!-- end col-xs-4 middle-->
+        
+      <div class="col-xs-4">
+          <div style="text-align:right">
+              <p >&copy 2014 design by <a href="http://www.cameronyick.us"><span class="logo">masc</span></a></p>
+          </div><!-- end align right-->
+      </div><!-- col-md-4 far right-->
+
+    </div><!-- end row of footer-->
+  </div><!-- end container -->
+</div><!-- end footer -->
+
+
+<!-- modals -->
+
+<div class="modal fade" id="about">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+              <img class="img-responsive" src = "assets/logo/logo_c.png">
+      </div>
+      <div class="modal-body">
+         <p style="margin:9px 7px; font-size:20px;"> </p>
+         <div class="row">
+          <div class="col-sm-7">
+            <div class="panel panel-default">
+              <div class="panel-body">
+              <ul class="fa-ul" style="margin:10px 35px;">
+                <li><i class="fa-li fa fa-check-square"></i>Minimal: 5 Task Cap</li>
+                <li><i class="fa-li fa fa-check-square"></i>Fun: Evolve your Buddy</li>
+                <li><i class="fa-li fa fa-check-square"></i>Personal: Customized Coaching</li>
+                <li><i class="fa-li fa fa-check-square"></i>Educational: Learn about Food</li>
+                <li><i class="fa-li fa fa-check-square"></i>Reliable: Powered by Yo!</li>
+              </ul>
+              </div>
+            </div>
+          </div >
+              <div class="col-sm-5">
+                <div class="thumbnail">
+                  <img src="assets/img/habitar.png" alt="habitar">
+                </div>
+              </div>
+         </div>
+  
+        <p style="margin:9px 7px; font-size:20px;">Team</p>
+        <dl class="dl-horizontal">
+          <dt><a href="#">Alan Liu</a></dt>
+          <dd>CS/Math @ yale '18</dd>
+          <dt><a href="#">Megan Valentine</a></dt>
+          <dd>Computing/Arts @ yale '16</dd>
+          <dt><a href="#">Summer Wu</a></dt>
+          <dd>CS @ yale '18</dd>
+          <dt><a href="#">Cameron Yick</a></dt>
+          <dd>EE @ yale '17</dd>
+   
+        </dl>
+
+          <p style="margin:5px 30px;text-indent:15px">habitar (noun): habit + avatar. Why not play a game that actually matters? <br>
+          </p>
+
+          <p style="margin:5px 30px;text-indent:15px">A habitar is your accountability buddy's best friend. Habitars are friendly bundles of joy (numbers and cultural enrichment) when the going is smooth. Don't be fooled by their friendly demeanor- when the going is tough, they'll notify your designated friends and family to help you get back on track. <br>
+          </p>
+
+          
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-info" data-dismiss="modal" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="contact">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Hey there!</h3>
+      </div>
+      <div class="modal-body">
+        <p>Like behavioral sciences, programming, and/or drawing?</p>
+        
+              <p>Send a note to <a href="mailto:makes@yale.edu">makes@yale.edu</a>. We'd love to hear from you!</p>
+
+
+        </div>
+              <div class="modal-footer">
+        <button class="btn btn-info" data-dismiss="modal" type="button">Close</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="stats">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Track Yo Progress</h3>
+      </div>
+      <div class="modal-body">
+     
+
+
+            <img src="assets/img/graph.png" class="img-responsive">
+  
+            <iframe id="coolMap" src="habitMap2.html" width="560" height="270" frameborder="0"></iframe>
+
+
+
+
+        </div>
+              <div class="modal-footer">
+        <button class="btn btn-info" data-dismiss="modal" type="button">Close</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="mood">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Choose Coaching Style</h3>
+      </div>
+      <div class="modal-body" id="spinbody">
+            <div class="container">
+
+                <!-- OUTER SHADOW -->
+                <div class="de">
+
+                  <!-- TEXT -->
+                  <div class="den">
+
+                      <!-- LINE -->
+                      <hr class="line">
+                      <hr class="line">
+                      <hr class="line">
+
+                      <!-- SWITCH -->
+                      <div class="switch">
+
+                          <!-- TEXT -->
+                          <label for="switch_1"><span><i class="big green smile icon"></i></span></label>
+                          <label for="switch_2"><span><i class="big meh icon"></i></span></label>
+                          <label for="switch_3"><span><i class="big red frown icon"></i></span></label>
+
+                          <!-- INPUT -->
+                          <input id="switch_1" name="switch" checked type="radio">
+                          <input id="switch_2" name="switch" type="radio">
+                          <input id="switch_3" name="switch" type="radio">
+
+                          <!-- LIGHT -->
+                          <div class="light"><span></span></div>
+
+                          <!-- DOT -->
+                          <div class="dot"><span></span></div>
+
+                          <!-- CENTER -->
+                          <div class="dene">
+                              <div class="denem">
+                                  <div class="deneme">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+        </div>
+              <div class="modal-footer">
+        <button class="btn btn-info" data-dismiss="modal" type="button">Close</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="settings">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Settings</h3>
+      </div>
+      <div class="modal-body">
+   
+          <div class="ui fluid accordion">
+            <div class="active title">
+              <i class="dropdown icon"></i>
+              Change Password
+            </div>
+            <div class="active content">
+              <div class="ui form" id="change_password">
+                <div class="field">
+                  <label>Current Password</label>
+                  <input type="text">
+                </div>
+                <div class="field">
+                  <label>New Password</label>
+                  <input type="text">
+                </div>
+                <div class="field">
+                  <label>Confirm New Password</label>
+                  <input type="text">
+                </div>
+              </div>
+              <div class="ui purple submit button">Change Password</div>      
+            </div>
+            <div class="title">
+              <i class="dropdown icon"></i>
+              Change Yo Account
+            </div>
+            <div class="content">
+                <div class="ui form" id="change_password">
+                    <div class="field">
+                      <label>Yo Account</label>
+                      <input type="text">
+                    </div>
+                </div>
+                <div class="ui submit button" style="background-color: #9B59B6; color: #ffffff">Change</div>      
+            </div>
+            <div class="title">
+              <i class="dropdown icon"></i>
+              Change Accountability Buddy
+            </div>
+            <div class="content">
+                 <div class="ui form" id="change_password">
+                    <div class="field">
+                      <label>Accountability Buddy Name</label>
+                      <input type="text">
+                    </div>
+                    <div class="field">
+                      <label>Accountability Buddy Email</label>
+                      <input type="text">
+                    </div>
+                </div>
+                <div class="ui submit button" style="background-color: #BDA0CB; color: #ffffff">Change</div> 
+            </div>
+          </div>
+
+
+        </div>
+              <div class="modal-footer">
+        <button class="btn btn-info" data-dismiss="modal" type="button">Close</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="add">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Add New Habit</h3>
+      </div>
+      <div class="modal-body">
+       
+          <div class="ui form">
+            <p style="font-weight:bold; font-size: 150%">Pick Your Habit<p>
+            <div class="field">
+              <label>Improve yourself! What new habit will you start?</label>
+              <input type="text" id="habit" placeholder="You can do it!">
+            </div>
+              
+            <div class="inline field">
+              <label>Keyword (optional)</label>
+              <input type="text"placeholder="keyword" id="keyword">
+              <a href="#" class="pop" rel="popover"
+   data-content="If you pick a single word that represents your habit, you will recieve fun, motivating facts. If your habit is a food or exercise goal, make sure to enter the name of the food or exercise."><i class="large info icon"></i></a>
+            </div>
+            
+            <div>My new habit will be a(n)
+                <div class="ui inline dropdown" id="habit_type" data-position="top right" data-offset="35">
+                  <div class="text">select</div>
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                    <div class="item" data-value="food goal">food goal</div>
+                    <div class="item" data-value="exercise goal">exercise goal</div>
+                    <div class="item" data-value="other goal">other goal</div>
+                  </div>
+                </div>
+              </div>
+                
+             <br>
+             <p style="font-weight:bold; font-size: 150%">How Often Will Your Habit Be?<p>
+             <div class="grouped inline fields">
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="time_frame" value="daily" checked="">
+                  <label>Daily</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="time_frame" value="weekly">
+                  <label>Weekly</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="time_frame" value="custom">
+                  <label>Custom:</label>
+                </div>
+              </div> 
+             </div>
+                  
+             <div id="custom_form">
+                <div class="inline fields">
+                  <div class="field">
+                    <label>Once every</label>
+                      <input type="text" placeholder="number of days/weeks" id="custom_number">
+                  </div>
+                  <div class="field">
+                    <div class="ui inline dropdown" style="padding-top: 10px" id="freq_type">
+                      <div class="text">days</div>
+                      <i class="dropdown icon"></i>
+                      <div class="menu">
+                        <div class="item active" data-text="days">days</div>
+                        <div class="item" data-text="weeks">weeks</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+       
+              <div class="ui blue submit button">Submit</div>       
+          </div>
+          <div>
+              <p id="errors" style="color:red"></p>
+          </div>
+
+
+
+
+
+
+
+        </div>
+        <div class="modal-footer">
+        <button class="btn btn-info" data-dismiss="modal" type="button">Close</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Libraries-->
+
+ <!-- Bootstrap and JQuery-->
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.19.3/javascript/semantic.min.js"></script>
+
+
+
+
+ <script>
+  $(function() {
+    $( "#sortTasks" ).sortable();
+    $( "#sortTasks" ).disableSelection();
+    // documentation: http://jqueryui.com/sortable/#placeholder 
+
+    document.getElementById('iFrameSrc').src ="assets/moods/egg_content/index.html";
+  });
+  </script>
+
+<script>
+jQuery( document ).ready(function( $ ) {
+      $('[rel="tooltip"]').click(function(e){
+        e.preventDefault();
+      });
+      $('[rel="tooltip"]').tooltip();
+
+  $('a.pop').click(function(e){
+    e.preventDefault();
+  });
+
+  $('a.pop').popover();
+
+});
+
+</script>
+
+<script>
+
+
+ function urlChange() {
+    var age = document.getElementById('iStringLabel').innerHTML;
+    site = document.getElementById('iStringLabel').innerHTML;
+    document.getElementById('iFrameSrc').src = site;
+    var selGround = document.getElementById('lblGround').innerHTML;
+    var path = 'assets/img/' + selGround + ".png";
+    document.getElementById('imgGround').src = path;
+
+}
+
+
+
+/*function animationClick(element, animation){
+  element = $(element);
+  element.click(
+    function() {
+      element.addClass('animated ' + animation);
+      console.log('animating');
+      //wait for animation to finish before removing classes
+      window.setTimeout( function(){
+          element.removeClass('animated ' + animation);
+      }, 2000);
+    }
+  );
+}; */
+
+  $(function() {
+    $('nav, .nav-controller').on('click', function(event) {
+        $('nav').toggleClass('focus');
+    });
+    $('nav, .nav-controller').on('mouseover', function(event) {
+        $('nav').addClass('focus');
+    }).on('mouseout', function(event) {
+        $('nav').removeClass('focus');
+    })
+});
+
+</script>
+
+<script type="text/javascript">
+
+
+
+  var tasksToClear= 5;
+  var gradient = ["#f7f3e7", "#eaf1d7", "#d0ecc8", "#b9e6c6", '#abe1d6']; // this is from lightest to darkest http://www.colorhexa.com/ffffff-to-a4dbde
+
+
+function my_fun(j){
+  var chkbox ="ckb" + j;
+  var my_span ="my_span" + j;
+  var box ="box" + j;
+  var msg = chkbox + " " + my_span;
+
+  console.log(tasksToClear + msg);
+
+  if(document.getElementById(chkbox).checked){ 
+    document.getElementById(my_span).style.textDecoration='line-through';
+    tasksToClear -= 1; 
+    var color = gradient[tasksToClear];
+    document.getElementById(box).style.backgroundColor=color;
+    console.log('point of no return' + tasksToClear);
+
+    if (tasksToClear == 0){
+      console.log('cleared the if' + tasksToClear);
+      for (d = 1; d < 6; d++){
+        console.log('cleared intoD' + d);
+            tree ="box" + d;
+            console.log('cleared tree' + tree);
+            document.getElementById(tree).style.display='none';
+
+      }
+      document.getElementById('quotebox').style.display='block';
+      return;
+    }
+
+  }else {
+    document.getElementById(my_span).style.textDecoration='none';
+    var color = gradient[5-tasksToClear];
+    document.getElementById(box).style.backgroundColor=color;
+    tasksToClear ++; 
+  }
+}
+</script>
+
+<script>
+  function AppViewModel(){
+      this.creatureAge= ko.observableArray(['egg', 'fledgling', 'adult', 'wings']);
+      this.creatureMood= ko.observableArray(['content', 'disappointed', 'elated']);
+      this.grounds= ko.observableArray(['grass', 'ocean', 'sand']);
+      this.selAge = ko.observable("egg");
+      this.selMood = ko.observable("content");
+      this.selGround = ko.observable("grass");
+      //this.iString= ko.observable("assets/moods/egg_content/index.html");
+
+      this.iString = ko.computed(function() {
+        return "assets/moods/" + this.selAge() + "_" + this.selMood() + "/index.html";    
+      }, this);
+
+  }
+
+ko.applyBindings(new AppViewModel());
+
+</script> 
+
+
+<!-- habit form js -->
+<script type="text/javascript">
+$('.ui.radio.checkbox').checkbox();
+$('.ui.dropdown').dropdown();
+
+
+
+//reminder to put food/exercise in the keyword field
+$('#habit_type').popup({
+    content  : 'If you have a food or exercise goal, remember to enter the name of the food or exercise in the keyword box!'
+});
+
+//show/hide custom time frame option
+$("#custom_form").hide();
+$('input[name="time_frame"]').change(function(){
+    if($(this).attr("value")=="daily" || $(this).attr("value")=="weekly"){
+        $("#custom_form").hide();
+    }
+    if($(this).attr("value")=="custom"){
+        $("#custom_form").show();
+    }
+});
+
+//form validation
+$('.ui.button').click(function(){
+    $("#errors").html(" ");
+    
+    var habit = $("#habit").val(); 
+    if(!habit){
+        $("#errors").append("You must input the habit you will start!<br>");
+    };
+    
+    var type = $("#habit_type").dropdown('get text');
+    if(!type || type=="select"){
+        $("#errors").append("You must select the type of goal your habit is!<br>");
+    };
+    
+    var keyword = $("#keyword").val();
+    if(keyword && !(/^[a-zA-Z][ a-zA-Z]*$/.test(keyword)) ){
+        $("#errors").append("Your keyword must be a valid word or phrase (letters only)!<br>");
+    };
+    
+    var frequency_type = $('input[name="time_frame"]:checked').val();
+    if(frequency_type == "custom"){
+        var number = $("#custom_number").val();
+        if(!number){
+            $("#errors").append("You must enter your custom number for the frequency of your new habit!<br>");
+        }
+        else if(!(/^[0-9]+$/.test(number)) || number==0){
+            $("#errors").append("Your custom number for frequency of the new habit must be a positive whole number!<br>");
+        };    
+    };
+    
+    if($("#errors").html() == " "){
+        if(frequency_type == "custom"){
+            if( $("#freq_type").dropdown('get text') =="days"){
+                frequency_type = "daily";
+            }
+            else {
+                frequency_type = "weekly";
+            }
+        }
+        else {
+            number = 1;
+        }
+        //for the database, use the values habit, keyword, type, frequency_type, number
+    };
+});
+</script>
+
+<script>
+$('.ui.accordion').accordion();
+</script>
+
+
+</body>
+</html>

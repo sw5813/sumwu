@@ -1,0 +1,396 @@
+
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html> <!--<![endif]-->
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>habitar: little habits, big dreams</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='habitar/css/bootstrap.min.css') }}" rel="stylesheet">
+ 
+    <!-- Custom Google Web Font -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--<link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'> -->
+	<link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+	
+    <!-- Custom CSS-->
+    <link href="{{ url_for('static', filename='habitar/css/general.css') }}" rel="stylesheet">
+	
+	 <!-- Owl-Carousel -->
+    <link href="{{ url_for('static', filename='habitar/css/custom.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='habitar/css/owl.carousel.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='habitar/css/owl.theme.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='habitar/css/style.css') }}" rel="stylesheet">
+	<link href="{{ url_for('static', filename='habitar/css/animate.css') }}" rel="stylesheet">
+	
+	<!-- Magnific Popup core CSS file -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='habitar/css/magnific-popup.css') }}"> 
+	
+	<script src="{{ url_for('static', filename='habitar/js/modernizr-2.6.2.min.js') }}"></script>  <!-- Modernizr /-->
+	<script src="{{ url_for('static', filename='habitar/js/PIE_IE9.js') }}"></script>  
+	<script src="{{ url_for('static', filename='habitar/js/PIE_IE678.js') }}"></script>  
+	
+	<!--[if lt IE 9]>
+		<script src="js/html5shiv.js"></script>
+	<![endif]-->
+
+	<style>
+		#iconeggs img{
+margin-left:51px;
+			width:250px;
+		}
+	</style>
+
+</head>
+
+<body id="home">
+	<!-- Preloader -->
+	<div id="preloader">
+		<div id="status"></div>
+	</div>
+	
+	<!-- FullScreen -->
+    <div class="intro-header">
+		<div class="col-xs-12 text-center abcen1">
+			<h1 class="h1_home wow fadeIn" data-wow-delay="0.4s" style="display:none">habitar</h1>
+
+			<img class="img-responsive" src = "{{ url_for('static', filename='habitar/assets/logo/logo_w.png') }}" style="width:80%;margin:auto">
+
+			<h3 class="h3_home wow fadeIn" data-wow-delay="0.6s">habit-building made fun!</h3>
+			<ul class="list-inline intro-social-buttons">
+				<li><a href="portal.html" class="btn btn-lg mybutton_cyano wow fadeIn" data-wow-delay="0.8s" style="display:none"><span class="network-name">Get Started</span></a>
+				</li>
+			</ul>
+		</div>    
+        <!-- /.container -->
+		<div class="col-xs-12 text-center abcen wow fadeIn">
+			<div class="button_down "> 
+				<a class="imgcircle wow bounceInUp" data-wow-duration="1.5s"  href="#whatis"> <img class="img_scroll" src="{{ url_for('static', filename='habitar/img/icon/circle.png') }}" alt=""> </a>
+			</div>
+		</div>
+    </div>
+	
+	<!-- NavBar-->
+	<nav class="navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#index">  <img src="{{ url_for('static', filename='habitar/assets/logo/logo_b.png') }}" style="width:150px; margin-top:-7px">      </a>
+			</div>
+
+			<div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					
+					<li class="menuItem"><a href="#whatis">What Is It?</a></li>
+					<li class="menuItem"><a href="#useit">Why Use It?</a></li>
+					<li class="menuItem"><a href="#screen">Habitars</a></li>
+					<li class="menuItem"><a href="#newsletter">Newsletter</a></li>
+				</ul>
+			</div>
+		   
+		</div>
+	</nav> 
+	
+	<!-- What is -->
+	<div id="whatis" class="content-section-b" style="border-top: 0">
+		<div class="container">
+
+			<div class="col-md-6 col-md-offset-3 text-center wrap_title">
+				<h2>habit &middot ar</h2>
+				<p class="lead" style="margin-top:0"> (noun) - habit + avatar <br> a little buddy to help you reach your dreams</p>
+				
+			</div>
+			
+			<div class="row" id="iconeggs">
+			
+				<div class="col-sm-4 wow fadeInDown text-center">
+				  <img class="rotate img-responsive" src="{{ url_for('static', filename='habitar/assets/icons/icon_minimal.png') }}" alt="minimal egg">
+				  <h3>Minimal</h3>
+				  <p class="lead">Keep it simple with no more than 5 tasks per day</p>
+				</div><!-- /.col-lg-4 -->
+				
+				<div class="col-sm-4 wow fadeInDown text-center">
+				  <img  class="rotate img-responsive" src="{{ url_for('static', filename='habitar/assets/icons/icon_personal.png') }}" alt="personal egg">
+				   <h3>Personal</h3>
+				   <p class="lead">Choose the type of coaching that suits what you need every day! </p>
+				</div><!-- /.col-lg-4 -->
+				
+				<div class="col-sm-4 wow fadeInDown text-center">
+				  <img  class="rotate img-responsive" src="{{ url_for('static', filename='habitar/assets/icons/icon_fun.png') }}" alt="fun egg">
+				   <h3>Fun!</h3>
+					<p class="lead">Watch your Habitar grow as you do, and unlock more Habitars as you succeed! </p>
+				  <p><a class="btn btn-embossed btn-info view" role="button" href="portal.html">Get Started</a></p>
+				</div><!-- /.col-lg-4 -->
+				
+			</div><!-- /.row -->
+				
+		</div>
+	</div>
+	
+	<!-- Use it -->
+    <div id ="useit" class="content-section-a">
+
+        <div class="container">
+			
+            <div class="row">
+			
+				<div class="col-sm-6 pull-right wow fadeInRightBig">
+                    <img class="img-responsive " src="{{ url_for('static', filename='habitar/assets/img/habitar.png') }}" alt="">
+                </div>
+				
+                <div class="col-sm-6 wow fadeInLeftBig"  data-animation-delay="200">   
+                    <h3 class="section-heading">Why use habitars?</h3>
+					<div class="sub-title lead3"> Habitar uses principles of cognitive science, psychology, and game design to make adding useful habits into your life simple, effective, and fun. </div>
+                    <p class="lead">
+						Productive habits are contagious. Why not try to catch 'em all?
+					</p>
+
+					 <p>
+					 <a class="btn btn-embossed btn-info" href="portal.html" role="button">Get Started!</a></p>
+				</div> <!-- end col -->  
+            </div><!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+
+    <div class="content-section-b" id="screen"> 
+		<div class="container">
+            <div class="row">
+                <div class="col-sm-6 wow fadeInLeftBig">
+                     <div id="owl-demo-1" class="owl-carousel">
+						<a href="#" class="image-link img-responsive">
+							<div class="item">
+								<img  class="img-responsive img-rounded" src="{{ url_for('static', filename='habitar/assets/lead/habitar-4.png') }}" alt="">
+							</div>
+						</a>
+						<a href="#" class="image-link">
+							<div class="item">
+								<img  class="img-responsive img-rounded" src="{{ url_for('static', filename='habitar/assets/lead/habitar-3.png') }}" alt="">
+							</div>
+						</a>
+						<a href="#" class="image-link">
+							<div class="item">
+								<img  class="img-responsive img-rounded" src="{{ url_for('static', filename='habitar/assets/icons/habitar-2.png') }}" alt="">
+							</div>
+						</a>
+					</div>       
+                </div>
+				
+                <div class="col-sm-6 wow fadeInRightBig"  data-animation-delay="200">   
+                    <h3 class="section-heading">Meet the Habitars!</h3>
+					<div class="sub-title lead3">Generation one!<br></div>
+                    <p class="lead">
+						Habitars start as eggs. As your habits become part of your life, they'll become happier... and if you're really consistent, you might find a wonderful surprise!
+					</p>
+
+					 <p> <a class="btn btn-embossed btn-info" href="portal.html" role="button " >Get Started!</a></p></p>
+				</div>  			
+			</div>
+        </div>
+    </div>
+
+    <div class="content-section-a">
+
+        <div class="container">
+
+             <div class="row">
+			 
+				<div class="col-sm-6 pull-right wow fadeInRightBig" >
+                    <img class="img-responsive " style="margin:auto" src="https://s3.amazonaws.com/hackerleague-production/organizations/logos/51f43f3b36944f2aa8000125/thumb.png" alt="">
+                </div>
+			 
+                <div class="col-sm-6 wow fadeInLeftBig"  data-animation-delay="200">   
+                    <h3 class="section-heading">YHack 2014 API Integration </h3>
+                    <p class="lead">This isn't your little cousins' Tamagotchi.
+					</p>
+					
+					<ul class="descp lead2">
+						<li><i class="glyphicon glyphicon-signal"></i> Integrated learning, powered by WolframAlpha</li>
+						<li><i class="glyphicon glyphicon-user"></i> Friendly reminders, powered by Yo!</li>
+					</ul>
+				</div>           
+            </div>
+        </div>
+
+    </div>
+
+	<!-- Screenshot -->
+	<div class="content-section-b">
+        <div class="container">
+          <div class="row" >
+			 <div class="col-md-6 col-md-offset-3 text-center wrap_title ">
+				<h2>Kindred Spirits</h2>
+				<p class="lead" style="margin-top:0">Just a few of the fellows looking to cheer you on!</p>
+			 </div>
+		  </div>
+		    <div class="row wow bounceInUp" >
+              <div id="owl-demo" class="owl-carousel">
+				
+				<a href="#" class="image-link">
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{{ url_for('static', filename='habitar/assets/lead/habitar-1.png') }}" alt="Owl Image">
+					</div>
+				</a>
+				
+               <a href="#" class="image-link">
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{{ url_for('static', filename='habitar/assets/lead/habitar-2.png') }}" alt="Owl Image">
+					</div>
+				</a>
+				
+				<a href="#" class="image-link">
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{{ url_for('static', filename='habitar/assets/lead/habitar-3.png') }}" alt="Owl Image">
+					</div>
+				</a>
+				
+				<a href="#" class="image-link">
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{{ url_for('static', filename='habitar/assets/lead/habitar-4.png') }}" alt="Owl Image">
+					</div>
+				</a>
+				
+               <a href="#" class="image-link">
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{{ url_for('static', filename='habitar/assets/lead/habitar-5.png') }}" alt="Owl Image">
+					</div>
+				</a>
+				
+				<a href="#" class="image-link">
+					<div class="item">
+						<img  class="img-responsive img-rounded" src="{{ url_for('static', filename='habitar/assets/lead/habitar-6.png') }}" alt="Owl Image">
+					</div>
+				</a>
+		
+              </div>       
+          </div>
+        </div>
+
+
+	</div>
+	
+	<div  class="content-section-c " id="newsletter" >
+		<div class="container">
+			<div class="row">
+			<div class="col-md-6 col-md-offset-3 text-center white">
+				<h2>Catch 'em.</h2>
+				<p class="lead" style="margin-top:0">Finding a buddy is just the beginning. Learn from and inspire others who've made changes!</p>
+			 </div>
+			<div class="col-md-6 col-md-offset-3 text-center">
+				<div class="mockup-content">
+						<div class="morph-button wow pulse morph-button-inflow morph-button-inflow-1">
+							<button type="button "><span>Subscribe to Newsletter</span></button>
+							<div class="morph-content">
+								<div>
+									<div class="content-style-form content-style-form-4 ">
+										<h2 class="morph-clone">Subscribe to Newsletter</h2>
+										<form>
+											<p><label>Email</label><input type="text"/></p>
+											<p><button>Connect Me!</button></p>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>	
+			</div>>
+		</div>
+	</div>	
+		
+			<img class="img-responsive" src = "{{ url_for('static', filename='habitar/assets/lead/cover.png') }}" >
+
+		
+	
+	<!-- Banner Download -->
+	<div id="downloadlink" class="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3 text-center wrap_title">
+				<h2>What are you waiting for?!</h2>
+				<p class="lead" style="margin-top:0">Change is just a click away</p>
+				<p><a class="btn btn-embossed btn-primary view" role="button" href="portal.html">Get Started!</a></p> 
+			 </div>
+			</div>
+		</div>
+	</div>
+	
+
+    <div class="footer">
+	<div class="container">
+      <div class="row">
+        <div class="col-xs-4">
+          <div style="text-align:left">
+              <p class="footlist">
+
+                <a data-toggle="modal" href="index.html" > <strong>habit</strong>ar</a>  
+                <a data-toggle="modal" href="#about" > about </a>  |  
+                <a data-toggle="modal" href="#contact"> contact </a> |  
+					 <a href="#"> <i class="fa fa-twitter fa-lg"></i> </a> 
+					 <a href="#"> <i class="fa fa-facebook-square fa-lg"></i> </a> 
+
+					</p>
+          </div><!-- end align right-->
+
+        </div><!-- end left col-md-4 -->
+        <div class="col-xs-4">
+          <div style="text-align:center">
+              <p>   
+                  habitar: big dreams, little habits
+              </p>
+            </div><!-- end align center-->
+        </div><!-- end col-xs-4 middle-->
+        
+      <div class="col-xs-4">
+          <div style="text-align:right">
+              <p >&copy 2014 design by <a href="http://www.cameronyick.us"><span class="logo">masc</span></a></p>
+          </div><!-- end align right-->
+      </div><!-- col-md-4 far right-->
+
+    </div><!-- end row of footer-->
+  </div><!-- end container -->
+</div><!-- end footer -->
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='habitar/js/jquery-1.10.2.js') }}"></script>
+    <script src="{{ url_for('static', filename='habitar/js/bootstrap.js') }}"></script>
+	<script src="{{ url_for('static', filename='habitar/js/owl.carousel.js') }}"></script>
+	<script src="{{ url_for('static', filename='habitar/js/script.js') }}"></script>
+	<!-- StikyMenu -->
+	<script src="{{ url_for('static', filename='habitar/js/stickUp.min.js') }}"></script>
+	<script type="text/javascript">
+	  jQuery(function($) {
+		$(document).ready( function() {
+		  $('.navbar-default').stickUp();
+		  
+		});
+	  });
+	
+	</script>
+	<!-- Smoothscroll -->
+	<script type="text/javascript" src="{{ url_for('static', filename='habitar/js/jquery.corner.js') }}"></script> 
+	<script src="{{ url_for('static', filename='habitar/js/wow.min.js') }}"></script>
+	<script>
+	 new WOW().init();
+	</script>
+	<script src="{{ url_for('static', filename='habitar/js/classie.js') }}"></script>
+	<script src="{{ url_for('static', filename='habitar/js/uiMorphingButton_inflow.js') }}"></script>
+	<!-- Magnific Popup core JS file -->
+	<script src="{{ url_for('static', filename='habitar/js/jquery.magnific-popup.js') }}"></script>
+</body>
+
+</html>
