@@ -13,8 +13,7 @@ def yaleims():
 
 @app.route('/habitar')
 def habitar():
-	wks = controllers.overall()
-	return render_template('habitar/index.html', wks=wks)
+	return render_template('habitar/index.html')
 
 @app.route('/user/<username>')
 def hello(username):
