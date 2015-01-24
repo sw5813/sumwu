@@ -15,6 +15,10 @@ def yaleims():
 def habitar():
 	return render_template('habitar/index.html')
 
+@app.route('/uplyft')
+def uplyft():
+	return render_template('uplyft.html')
+
 @app.route('/user/<username>')
 def hello(username):
 	return 'hey %s!' % username

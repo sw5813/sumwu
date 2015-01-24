@@ -1,0 +1,9 @@
+
+body { margin: 0; padding: 0; }
+
+.Header { position: absolute; left: 0; top: 0; width: 100%; height: 30px; line-height: 30px; text-align: center; background: #000; color: #fff; }
+.Footer { position: absolute; left: 0; bottom: 0; width: 100%; height: 30px; line-height: 30px; text-align: center; background: #000; color: #fff; }
+
+.SlideContainer { position: absolute; left: 0; top: 30px; width: 100%; overflow: hidden; }
+.Slides { position: absolute; left: 0; top: 0; height: 100%; }
+.Slides > div { float: left; height: 100% }
