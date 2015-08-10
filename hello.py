@@ -19,6 +19,14 @@ def habitar():
 def narwhals():
 	return render_template('narwhals/index.html')
 
+@app.route('/v2')
+def v2():
+	return render_template('homev2.html')
+
+@app.route('/blog')
+def blog():
+	return render_template('blog.html')
+
 @app.route('/user/<username>')
 def hello(username):
 	return 'hey %s!' % username
