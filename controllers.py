@@ -1,19 +1,17 @@
-from keyczar import keyczar
-import gspread
-
-def decrypt(ciphertext):
-    location = './keys'
-    crypter = keyczar.Crypter.Read(location)
-    plaintext = crypter.Decrypt(ciphertext)
-
-    return plaintext
+import json
+import gspread, requests
+from oauth2client.client import SignedJwtAssertionCredentials
 
 def overall():
-	# Login with your Google account
-	gc = gspread.login(decrypt('AKEQNEBAIOxdrZIPdML6l0bu4Wt6jPKG88td--0KVA5xXluxBSPUlJuIwfvhZzuMKcf3GW1-KUmPyfcWizhQsXzMs8rGZ5zUiQ'), decrypt('AKEQNECl_fi8axz0d1i3t_Z-YmqRowycteVXl3bJGIshMiEcFcB7JaO-gcI6QSRtuvDuP91H2h3t'))
+	json_key = json.load(open('./keys/requirements.json'))
+	scope = ['https://spreadsheets.google.com/feeds']
+
+	credentials = SignedJwtAssertionCredentials(json_key['client_email'], json_key['private_key'], scope)
+
+	gc = gspread.authorize(credentials)
 
 	# Open the first worksheet
-	standings = gc.open_by_url("https://docs.google.com/a/yale.edu/spreadsheets/d/1fJ-bIkjFERyPApaGtUb3cvom7rO1bQYrig7Ly0Hy0jM/edit#gid=477165936").sheet1
+	standings = gc.open('Copy of IM Schedule and Standings').sheet1
 
 	# Fetch overall rankings
 	overall = standings.range('B3:D15')
@@ -24,3 +22,25 @@ def overall():
 		table.append(val)
 
 	return table
+
+def instagram():
+	client_id = '574722ec06494eb79b0b9615ecd593cb'
+	base_api = 'https://api.instagram.com/v1/'
+
+	# Get 20 most recent posts with #CapitalOne tag
+	result = requests.get(base_api + 'tags/CapitalOne/media/recent?count=20&client_id=' + client_id)
+
+	captions = []
+	likes = []
+	images = []
+	users = []
+
+	data = result.json()['data']
+
+	for post in data:
+		captions.append(post['caption']['text'])
+		likes.append(post['likes']['count'])
+		images.append(post['images']['thumbnail']['url'])
+		users.append(post['user']['username'])
+
+	return { 'captions':captions, 'likes':likes, 'images':images, 'users':users }

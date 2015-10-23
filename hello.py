@@ -27,6 +27,16 @@ def v2():
 def blog():
 	return render_template('blog.html')
 
+
+@app.route('/capitalone')
+def capitolone():
+	posts = controllers.instagram()
+	captions = posts['captions']
+	likes = posts['likes']
+	images = posts['images']
+	users = posts['users']
+	return render_template('capitalone.html', captions=captions, likes=likes, images=images, users=users)
+
 @app.route('/user/<username>')
 def hello(username):
 	return 'hey %s!' % username
