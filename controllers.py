@@ -3,8 +3,6 @@ import requests, urllib2
 from bs4 import BeautifulSoup
 
 def overall():
-	api = "http://www.imleagues.com/School/Division/viewstanding.aspx?Division="
-	json_sports = json.load(open('./keys/links.json'))
 	scores = {
 		"Morse":0,
 		"Branford":0,
@@ -20,64 +18,54 @@ def overall():
 		"Pierson":0
 	}
 
-	full_team_size = 0
-	for sport in json_sports:
+	# Call kimono API
+	results = json.load(urllib2.urlopen("https://www.kimonolabs.com/api/5qxqpxj8?apikey=7b965rHdqqFqdp0McyJ3qkUGAQUoHXGx"))
+	json_scores = results["results"]["scores"]
+
+	for i in range(90):
+		# Add to college totals
+		sport = json_scores[i]["api"]
+		college_name = json_scores[i]["team"]
+		wins = float(json_scores[i]["wins"])
+		ties = float(json_scores[i]["ties"])
+
 		# Determine full_team_size
+		full_team_size = 0
 		if sport == "c_football" or sport == "m_football":
 			full_team_size = 6
 		elif sport == "c_soccer" or sport == "m_soccer" or sport == "w_soccer":
 			full_team_size = 11
-		elif sport == "c_tabletennis" or sport == "tennis":
+		elif sport == "c_tabletennis" or sport == "c_tennis":
 			full_team_size = 10
-		elif sport == "volleyball":
+		elif sport == "c_volleyball":
 			full_team_size = 6
 
-		# Go to site
-		link = api + json_sports[sport]
-		web_page = urllib2.urlopen(link).read()
-		soup = BeautifulSoup(web_page, "html.parser")
-
-		# Add to college totals
-		for i in range(12):
-			team_id = "ctl00_ContentPlaceHolder1_gvTeams_ctl%02d_lblName" % (i + 2)
-			college_name = soup.find(id=team_id).string
-			
-			# Wins and Ties
-			points_id = "ctl00_ContentPlaceHolder1_gvTeams_ctl%02d_lblWLT" % (i + 2)
-			wlt = soup.findAll(id=points_id)
-			wins = float(wlt[0].string)
-			ties = float(wlt[2].string)
-
-			# Exception for women's soccer since each team has two colleges
-			if sport == "w_soccer":
-				college1 = ""
-				college2 = ""
-				if college_name == "BK-ES":
-					college1 = "Berkeley"
-					college2 = "Ezra Stiles"
-				elif college_name == "PC-TC":
-					college1 = "Pierson"
-					college2 = "Trumbull"
-				elif college_name == "MC-SY":
-					college1 = "Morse"
-					college2 = "Saybrook"
-				if college_name == "TD-SM":
-					college1 = "Timothy Dwight"
-					college2 = "Silliman"
-				elif college_name == "JE-BR":
-					college1 = "Jonathan Edwards"
-					college2 = "Branford"
-				elif college_name == "DC-CC":
-					college1 = "Davenport"
-					college2 = "Calhoun"
-				scores[college1] += (wins + ties*0.5)*full_team_size
-				scores[college2] += (wins + ties*0.5)*full_team_size
-			else:
-				scores[college_name] += (wins + ties*0.5)*full_team_size
-
-			# Exception for women's soccer since there are only 6 teams
-			if sport == "w_soccer" and i == 5:
-				break;
+		# Exception for women's soccer since each team has two colleges
+		if sport == "w_soccer":
+			college1 = ""
+			college2 = ""
+			if college_name == "BK-ES":
+				college1 = "Berkeley"
+				college2 = "Ezra Stiles"
+			elif college_name == "PC-TC":
+				college1 = "Pierson"
+				college2 = "Trumbull"
+			elif college_name == "MC-SY":
+				college1 = "Morse"
+				college2 = "Saybrook"
+			if college_name == "TD-SM":
+				college1 = "Timothy Dwight"
+				college2 = "Silliman"
+			elif college_name == "JE-BR":
+				college1 = "Jonathan Edwards"
+				college2 = "Branford"
+			elif college_name == "DC-CC":
+				college1 = "Davenport"
+				college2 = "Calhoun"
+			scores[college1] += (wins + ties*0.5)*full_team_size
+			scores[college2] += (wins + ties*0.5)*full_team_size
+		else:
+			scores[college_name] += (wins + ties*0.5)*full_team_size
 
 	# Sort colleges by rank, display in table
 	sorted_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
