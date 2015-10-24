@@ -2,6 +2,17 @@
  * Globals
  */
 
+@font-face {
+  font-family: 'Georgia';
+  src: url(../../fonts/Georgia.ttf);
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(../../fonts/Montserrat.ttf);
+}
+
+
 /* Links */
 a,
 a:focus,
