@@ -8,8 +8,8 @@ def index():
 
 @app.route('/yaleims')
 def yaleims():
-	wks = controllers.overall()
-	return render_template('yaleims/home.html', wks=wks)
+	scores = controllers.overall()
+	return render_template('yaleims/home.html', scores=scores)
 
 @app.route('/habitar')
 def habitar():

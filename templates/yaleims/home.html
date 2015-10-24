@@ -2,71 +2,13 @@
 
   <div class="col-sm-6 col-sm-offset-3">
     <table class="table">
+      {% for i in range(12) %}
       <tr>
-        <td>{{ wks[0] }}</td>
-        <td>{{ wks[1] }}</td>
-        <td>{{ wks[2] }}</td>
+        <td>{{ i + 1 }}</td>
+        <td>{{ scores[i][0] }}</td>
+        <td>{{ scores[i][1] }}</td>
       </tr>
-      <tr>
-        <td>{{ wks[3] }}</td>
-        <td>{{ wks[4] }}</td>
-        <td>{{ wks[5] }}</td>
-      </tr>
-      <tr>
-        <td>{{ wks[6] }}</td>
-        <td>{{ wks[7] }}</td>
-        <td>{{ wks[8] }}</td>
-      </tr>
-      <tr>
-        <td>{{ wks[9] }}</td>
-        <td>{{ wks[10] }}</td>
-        <td>{{ wks[11] }}</td>
-      </tr>
-      <tr>
-        <td>{{ wks[12] }}</td>
-        <td>{{ wks[13] }}</td>
-        <td>{{ wks[14] }}</td>
-      </tr>
-      <tr>
-        <td>{{ wks[15] }}</td>
-        <td>{{ wks[16] }}</td>
-        <td>{{ wks[17] }}</td>
-      </tr>
-      <tr>
-        <td>{{ wks[18] }}</td>
-        <td>{{ wks[19] }}</td>
-        <td>{{ wks[20] }}</td>
-      </tr>
-      <tr>
-        <td>{{ wks[21] }}</td>
-        <td>{{ wks[22] }}</td>
-        <td>{{ wks[23] }}</td>
-      </tr>
-      <tr>
-        <td>{{ wks[24] }}</td>
-        <td>{{ wks[25] }}</td>
-        <td>{{ wks[26] }}</td>
-      </tr>
-      <tr>
-        <td>{{ wks[27] }}</td>
-        <td>{{ wks[28] }}</td>
-        <td>{{ wks[29] }}</td>
-      </tr>
-      <tr>
-        <td>{{ wks[30] }}</td>
-        <td>{{ wks[31] }}</td>
-        <td>{{ wks[32] }}</td>
-      </tr>
-      <tr>
-        <td>{{ wks[33] }}</td>
-        <td>{{ wks[34] }}</td>
-        <td>{{ wks[35] }}</td>
-      </tr>
-      <tr>
-        <td>{{ wks[36] }}</td>
-        <td>{{ wks[37] }}</td>
-        <td>{{ wks[38] }}</td>
-      </tr>
+      {% endfor %}
     </table>
 
 {% include 'yaleims/footer.html' %}
