@@ -53,7 +53,7 @@ def overall():
 			elif college_name == "MC-SY":
 				college1 = "Morse"
 				college2 = "Saybrook"
-			if college_name == "TD-SM":
+			elif college_name == "TD-SM":
 				college1 = "Timothy Dwight"
 				college2 = "Silliman"
 			elif college_name == "JE-BR":
