@@ -3,10 +3,13 @@
  */
 
 /* Links */
-a,
 a:focus,
 a:hover {
   color: #333;
+}
+
+a, p {
+  color: #AFAFAF;
 }
 
 /*
@@ -22,9 +25,38 @@ body {
 body {
   color: #333;
   text-align: left;
-  padding: 50px 150px;
+  padding: 0 20px;
 }
 
-h1 {
-	padding-bottom: 50px;
+thead {
+	color: #AFAFAF;
+}
+
+li {
+	list-style-type: none;
+}
+
+.container {
+  width: auto;
+  max-width: 720px;
+}
+
+.positive {
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+.negative {
+  background-color: rgba(255, 0, 0, 0.1);;
+}
+
+@media (min-width: 548px) {
+  h1 {
+    padding: 50px 20px;
+  }
+}
+
+@media (min-width: 992px) {
+  h1 {
+    padding: 50px 150px;
+  }
 }
