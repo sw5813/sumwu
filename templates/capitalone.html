@@ -8,7 +8,7 @@
     <meta name="author" content="Summer Wu">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
 
-    <title>Capital One</title>
+    <title>#CapitalOne #top20</title>
 
     <!-- Bootstrap core CSS -->
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
@@ -36,6 +36,7 @@
         <tr>
           <td>{{ i + 1 }}</td>
           <td>{{ captions[i] }}</td>
+          <td>{{ likes[i] }}</td>
           <td>{{ users[i] }}</td>
         </tr>
         {% endfor %}
