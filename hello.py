@@ -35,7 +35,9 @@ def capitolone():
 	likes = posts['likes']
 	images = posts['images']
 	users = posts['users']
-	return render_template('capitalone.html', captions=captions, likes=likes, images=images, users=users)
+	times = posts['times']
+	sentiments = posts['sentiments']
+	return render_template('capitalone.html', captions=captions, likes=likes, images=images, users=users, times=times, sentiments=sentiments)
 
 @app.route('/user/<username>')
 def hello(username):

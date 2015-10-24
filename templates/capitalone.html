@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Capital One Instagram Challenge">
     <meta name="author" content="Summer Wu">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/capitalone.ico') }}" />
 
-    <title>#CapitalOne #top20</title>
+    <title>Capital One Instagram Challenge</title>
 
     <!-- Bootstrap core CSS -->
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
@@ -30,17 +30,43 @@
   </head>
   <body>
 	<h1>#CapitalOne on Instagram</h1>
-    <div class="col-sm-6 col-sm-offset-3">
+    <div class="container">
       <table class="table">
-        {% for i in range(20) %}
-        <tr>
-          <td>{{ i + 1 }}</td>
-          <td>{{ captions[i] }}</td>
-          <td>{{ likes[i] }}</td>
-          <td>{{ users[i] }}</td>
-        </tr>
-        {% endfor %}
+        <thead>
+          <tr>
+            <td>Time</td>
+            <td>Image</td>
+            <td>Caption</td>
+            <td>Likes</td>
+            <td>User</td>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in range(20) %}
+          {% if sentiments[i] == 'pos' %}
+          <tr class="positive">
+          {% elif sentiments[i] == 'neg' %}
+          <tr class="negative">
+          {% else %}
+          <tr>
+          {% endif %}
+            <td>{{ times[i] }}</td>
+            <td><img src='{{ images[i] }}' /></td>
+            <td>{{ captions[i] }}</td>
+            <td>{{ likes[i] }}</td>
+            <td>
+              {{ users[i]['username'] }}
+              <ul>
+                <li>{{ users[i]['num_posts'] }} posts</li>
+                <li>{{ users[i]['num_follows'] }} followers</li>
+                <li>{{ users[i]['num_followers'] }} following</li>
+              </ul>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
       </table>
     </div>
+    <p class="pull-right">Created by: <a href="{{ url_for('index') }}">Summer Wu</a></p>
   </body>
 </html>
