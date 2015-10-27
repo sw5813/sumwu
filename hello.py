@@ -27,6 +27,9 @@ def v2():
 def blog():
 	return render_template('blog.html')
 
+@app.route('/section50')
+def section50():
+	return render_template('section50.html')
 
 @app.route('/capitalone')
 def capitolone():
