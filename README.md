@@ -15,4 +15,4 @@ personal site/project playground
 	- #CapitalOne Instagram project at https://sumwu.me/capitalone
 
 ### To do:
-* Store old stats in mongodb database as backup in case connection goes haywire
+* Look into utilizing Flask-Cache in blog

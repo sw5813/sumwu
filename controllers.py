@@ -1,6 +1,5 @@
 import json, time, os, operator
 import requests, urllib2
-from bs4 import BeautifulSoup
 
 def overall():
 	scores = {

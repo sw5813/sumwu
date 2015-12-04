@@ -1,6 +1,48 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
+from sqlalchemy import create_engine, MetaData
+from flask.ext.login import UserMixin, LoginManager, login_user, logout_user
+from flask.ext.blogging import SQLAStorage, BloggingEngine
+
 import controllers
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "secret"  # for WTF-forms and login
+app.config["BLOGGING_URL_PREFIX"] = "/blog"
+app.config["BLOGGING_DISQUS_SITENAME"] = "Budapest"
+app.config["BLOGGING_SITEURL"] = "http://localhost:8000"
+app.config["BLOGGING_SITENAME"] = "Travels"
+
+# extensions
+engine = create_engine('sqlite:////tmp/blog.db')
+meta = MetaData()
+sql_storage = SQLAStorage(engine, metadata=meta)
+blog_engine = BloggingEngine(app, sql_storage)
+login_manager = LoginManager(app)
+meta.create_all(bind=engine)
+
+
+# user class for providing authentication
+class User(UserMixin):
+    def __init__(self, user_id):
+        self.id = user_id
+
+    def get_name(self):
+        return "Summer Wu"  # typically the user's name
+
+@login_manager.user_loader
+@blog_engine.user_loader
+def load_user(user_id):
+    return User(user_id)
+
+@app.route("/login/")
+def login():
+    user = User("admin")
+    login_user(user)
+    return redirect("/blog/")
+
+@app.route("/logout/")
+def logout():
+    logout_user()
+    return redirect("/blog/")
 
 @app.route('/')
 def index():
@@ -25,7 +67,7 @@ def v2():
 
 @app.route('/blog')
 def blog():
-	return render_template('blog.html')
+	return redirect("/blog/")
 
 @app.route('/section50')
 def section50():
