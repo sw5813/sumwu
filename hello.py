@@ -35,9 +35,19 @@ def load_user(user_id):
 
 @app.route("/login/")
 def login():
-    user = User("admin")
-    login_user(user)
-    return redirect("/blog/")
+	form = LoginForm()
+	if form.validate_on_submit():
+	    user = User("admin")
+	    login_user(user)
+	    flash('Logged in successfully.')
+	    next = request.args.get('next')
+        # next_is_valid should check if the user has valid
+        # permission to access the `next` url
+        if not next_is_valid(next):
+            return abort(400)
+
+        return redirect(next or "/blog/")
+	return render_template('login.html', form=form)
 
 @app.route("/logout/")
 def logout():
