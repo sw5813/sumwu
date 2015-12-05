@@ -70,6 +70,85 @@ def overall():
 	sorted_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
 	return sorted_scores
 
+def sport(sport):
+	scores = {
+		"Morse":0,
+		"Branford":0,
+		"Ezra Stiles":0,
+		"Timothy Dwight":0,
+		"Berkeley":0,
+		"Calhoun":0,
+		"Silliman":0,
+		"Jonathan Edwards":0,
+		"Trumbull":0,
+		"Saybrook":0,
+		"Davenport":0,
+		"Pierson":0
+	}
+
+	kimono_ids = {
+		"w_soccer": "4gfpvl6w",
+		"c_football": "8excyibu",
+		"c_tennis": "2q1qdvcy",
+		"c_tabletennis": "dhat65ri",
+		"m_football": "a6i2zx3i",
+		"m_soccer": "c9bbtr10",
+		"c_soccer": "csg6u8yq",
+		"c_volleyball": "5d49y3kc"
+	}
+
+	# Call kimono API
+	results = json.load(urllib2.urlopen("https://www.kimonolabs.com/api/" + kimono_ids[sport] + "?apikey=7b965rHdqqFqdp0McyJ3qkUGAQUoHXGx"))
+	json_scores = results["results"]["scores"]
+
+	for i in range(len(json_scores)):
+		# Add to college totals
+		college_name = json_scores[i]["team"]
+		wins = float(json_scores[i]["wins"])
+		ties = float(json_scores[i]["ties"])
+
+		# Determine full_team_size
+		full_team_size = 0
+		if sport == "c_football" or sport == "m_football":
+			full_team_size = 6
+		elif sport == "c_soccer" or sport == "m_soccer" or sport == "w_soccer":
+			full_team_size = 11
+		elif sport == "c_tabletennis" or sport == "c_tennis":
+			full_team_size = 10
+		elif sport == "c_volleyball":
+			full_team_size = 6
+
+		# Exception for women's soccer since each team has two colleges
+		if sport == "w_soccer":
+			college1 = ""
+			college2 = ""
+			if college_name == "BK-ES":
+				college1 = "Berkeley"
+				college2 = "Ezra Stiles"
+			elif college_name == "PC-TC":
+				college1 = "Pierson"
+				college2 = "Trumbull"
+			elif college_name == "MC-SY":
+				college1 = "Morse"
+				college2 = "Saybrook"
+			elif college_name == "TD-SM":
+				college1 = "Timothy Dwight"
+				college2 = "Silliman"
+			elif college_name == "JE-BR":
+				college1 = "Jonathan Edwards"
+				college2 = "Branford"
+			elif college_name == "DC-CC":
+				college1 = "Davenport"
+				college2 = "Calhoun"
+			scores[college1] += (wins + ties*0.5)*full_team_size
+			scores[college2] += (wins + ties*0.5)*full_team_size
+		else:
+			scores[college_name] += (wins + ties*0.5)*full_team_size
+
+	# Sort colleges by rank, display in table
+	sorted_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
+	return sorted_scores
+
 def instagram():
 	client_id = os.environ['INSTAGRAM_CLIENT_ID']
 	insta_api = 'https://api.instagram.com/v1/'
