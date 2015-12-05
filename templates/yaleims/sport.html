@@ -1,0 +1,15 @@
+{% include 'yaleims/header.html' %}
+
+  <div class="col-sm-6 col-sm-offset-3">
+    <h3>{{ sport_name }}</h3>
+    <table class="table">
+      {% for i in range(12) %}
+      <tr>
+        <td>{{ i + 1 }}</td>
+        <td>{{ scores[i][0] }}</td>
+        <td>{{ scores[i][1] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+{% include 'yaleims/footer.html' %}

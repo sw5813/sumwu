@@ -54,31 +54,46 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="imlinks">
           <ul class="nav navbar-nav">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Master Schedule</a></li>
+            <li><a href="{{ url_for('yaleims') }}">Home</a></li>
+            <li><a href="{{ url_for('yaleims', page='about') }}">About</a></li>
+            <li><a href="http://www.imleagues.com/School/Portal.aspx?Portal=SchOfDay&SchID=b25b75c09f814fb0a8d6cc141221bd11">Schedule</a></li>
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Colleges <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fall Sports <span class="caret"></span></a>
               <ul class="dropdown-menu inverse-dropdown" role="menu">
-                <li><a href="#">Berkeley</a></li>
-                <li><a href="#">Branford</a></li>
-                <li><a href="#">Calhoun</a></li>
-                <li><a href="#">Davenport</a></li>
-                <li><a href="#">Ezra Stiles</a></li>
-                <li><a href="#">Jonathan Edwards</a></li>
-                <li><a href="#">Morse</a></li>
-                <li><a href="#">Pierson</a></li>
-                <li><a href="#">Saybrook</a></li>
-                <li><a href="#">Silliman</a></li>
-                <li><a href="#">Timothy Dwight</a></li>
-                <li><a href="#">Trumbull</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='c_football') }}">Coed Football</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='m_football') }}">Men's Football</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='c_soccer') }}">Coed Soccer</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='m_soccer') }}">Men's Soccer</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='w_soccer') }}">Women's Soccer</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='c_tabletennis') }}">Coed Table Tennis</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='c_tennis') }}">Tennis</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='c_volleyball') }}">Volleyball</a></li>
               </ul>
             </li>
-            <li><a href="#">Dead Teams</a></li>
-            <li><a href="#">Archives</a></li>
-            <li><a href="#">Media</a></li>
-            <li><a href="#">Rules</a></li>
-            <li><a href="#">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Winter Sports <span class="caret"></span></a>
+              <ul class="dropdown-menu inverse-dropdown" role="menu">
+                <li><a href="#">Men's A-Hoops</a></li>
+                <li><a href="#">Men's B-Hoops</a></li>
+                <li><a href="#">Men's C-Hoops</a></li>
+                <li><a href="#">Women's Basketball</a></li>
+                <li><a href="#">Men's Indoor Volleyball</a></li>
+                <li><a href="#">Women's Indoor Volleyball</a></li>
+                <li><a href="#">Inner-Tube Water Polo</a></li>
+                <li><a href="#">Swimming</a></li>
+                <li><a href="#">Bowling</a></li>
+                <li><a href="#">Hockey</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Spring Sports <span class="caret"></span></a>
+              <ul class="dropdown-menu inverse-dropdown" role="menu">
+                <li><a href="#">Ultimate Frisbee</a></li>
+              </ul>
+            </li>
+            <li><a href="{{ url_for('yaleims', page='archives') }}">Archives</a></li>
+            <li><a href="{{ url_for('yaleims', page='rules') }}">Rules</a></li>
+            <li><a href="{{ url_for('yaleims', page='contact') }}">Contact</a></li>
           </ul>
           
         </div><!-- /.navbar-collapse -->

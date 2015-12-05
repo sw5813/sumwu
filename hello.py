@@ -48,10 +48,32 @@ def logout():
 def index():
     return render_template('index.html')
 
-@app.route('/yaleims')
-def yaleims():
-	scores = controllers.overall()
-	return render_template('yaleims/home.html', scores=scores)
+@app.route('/test')
+def test():
+    return render_template('test.html')
+
+@app.route('/yaleims/', defaults={'page': "home", 'sport': ""})
+@app.route('/yaleims/<page>', defaults={'sport': ""})
+@app.route('/yaleims/<page>/<sport>')
+def yaleims(page, sport):
+	if page == "home":
+		scores = controllers.overall()
+		return render_template('yaleims/home.html', scores=scores)
+	elif page == "sport":
+		sport_names = {
+			"c_football": "Coed Football",
+			"m_football": "Men's Football",
+			"c_soccer": "Coed Soccer",
+			"m_soccer": "Men's Soccer",
+			"w_soccer": "Women's Soccer",
+			"c_tabletennis": "Coed Table Tennis",
+			"c_tennis": "Coed Tennis",
+			"c_volleyball": "Coed Volleyball"
+		}
+		scores = controllers.sport(sport)
+		return render_template('yaleims/sport.html', sport_name=sport_names[sport], scores=scores)
+	else:
+		return render_template('yaleims/%s.html' % page)
 
 @app.route('/habitar')
 def habitar():
