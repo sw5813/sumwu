@@ -19,5 +19,6 @@ personal site/project playground
 
 ### Notes:
 * No real users, just a session code check
-
-todo: fill form with stored info
+* Local database info:
+	basedir = os.path.abspath(os.path.dirname(__file__))
+	print('sqlite:///' + os.path.join(basedir, 'app.db'))
