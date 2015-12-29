@@ -1,6 +1,7 @@
 from app import app, blog_engine, login_manager, db
 from flask import flash, jsonify, render_template, redirect, request, session
 from flask.ext.login import LoginManager, login_user, logout_user
+import os
 
 import controllers
 from .models import User, Sport
