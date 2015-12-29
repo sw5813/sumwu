@@ -59,6 +59,7 @@ def admin():
 		if form.action.data == "add":
 			new_sport = Sport(form.sport.data, form.season.data, form.bk.data, form.br.data, form.cc.data, form.dc.data, form.es.data, form.je.data, form.mc.data, form.pc.data, form.sm.data, form.sy.data, form.tc.data, form.td.data)
 			db.session.add(new_sport)
+			db.session.commit()
 			return redirect("/yaleims/db_sport/" + form.sport.data)
 		elif form.action.data == "edit":
 			old_sport = Sport.query.filter_by(name=form.sport.data).first()
