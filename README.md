@@ -16,3 +16,8 @@ personal site/project playground
 
 ### To do:
 * Look into utilizing Flask-Cache in blog
+
+### Notes:
+* No real users, just a session code check
+
+todo: fill form with stored info

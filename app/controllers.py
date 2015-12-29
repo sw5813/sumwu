@@ -1,6 +1,8 @@
 import json, time, os, operator
 import requests, urllib2
 
+from .models import Sport
+
 def overall():
 	scores = {
 		"Morse":0,
@@ -66,7 +68,43 @@ def overall():
 		else:
 			scores[college_name] += (wins + ties*0.5)*full_team_size
 
+	# Add stored scores
+	stored_sports = Sport.query.all()
+	for add_sport in stored_sports:
+		scores["Morse"] += add_sport.mc
+		scores["Branford"] += add_sport.br
+		scores["Ezra Stiles"] += add_sport.es
+		scores["Timothy Dwight"] += add_sport.td
+		scores["Berkeley"] += add_sport.bk
+		scores["Calhoun"] += add_sport.cc
+		scores["Silliman"] += add_sport.sm
+		scores["Jonathan Edwards"] += add_sport.je
+		scores["Trumbull"] += add_sport.tc
+		scores["Saybrook"] += add_sport.sy
+		scores["Davenport"] += add_sport.dc
+		scores["Pierson"] += add_sport.pc
+
 	# Sort colleges by rank, display in table
+	sorted_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
+	return sorted_scores
+
+def db_sport(sport):
+	add_sport = Sport.query.filter_by(name=sport).first()
+	scores = {
+		"Morse":add_sport.mc,
+		"Branford":add_sport.br,
+		"Ezra Stiles":add_sport.es,
+		"Timothy Dwight":add_sport.td,
+		"Berkeley":add_sport.bk,
+		"Calhoun":add_sport.cc,
+		"Silliman":add_sport.sm,
+		"Jonathan Edwards":add_sport.je,
+		"Trumbull":add_sport.tc,
+		"Saybrook":add_sport.sy,
+		"Davenport":add_sport.dc,
+		"Pierson":add_sport.pc
+	}
+	# Sort colleges by rank for display in table
 	sorted_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
 	return sorted_scores
 

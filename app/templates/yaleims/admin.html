@@ -1,0 +1,74 @@
+{% include 'yaleims/header.html' %}
+
+	<!-- add sport, edit sport, delete sport -->
+
+	<div class="col-sm-6 col-sm-offset-3">
+	<form action="" method="post" name="login" class="form-inline" role="form">
+		{{ form.hidden_tag() }}
+		<h3>
+			Select Action: {{ form.action(class_="form-control") }}
+			<select id="select_sport" class="form-control hidden">
+				<option value="">(Select Sport)</option>
+				{% for sport in added_sports %}
+					<option value="{{ sport.name }}">{{ sport.name }}</option>
+				{% endfor %}
+			</select>
+		</h3>
+		<h3>
+			{{ form.season(class_="form-control") }}
+			{{ form.sport(size=20, class_="form-control", placeholder="Sport Name") }}
+		</h3>
+		<table class="table">
+			<tr>
+				<td>Berkeley</td>
+				<td>{{ form.bk(class_="form-control", type="number") }}</td>
+			</tr>
+			<tr>
+				<td>Branford</td>
+				<td>{{ form.br(class_="form-control", type="number") }}</td>
+			</tr>
+			<tr>
+				<td>Calhoun</td>
+				<td>{{ form.cc(class_="form-control", type="number") }}</td>
+			</tr>
+			<tr>
+				<td>Davenport</td>
+				<td>{{ form.dc(class_="form-control", type="number") }}</td>
+			</tr>
+			<tr>
+				<td>Ezra Stiles</td>
+				<td>{{ form.es(class_="form-control", type="number") }}</td>
+			</tr>
+			<tr>
+				<td>Jonathan Edwards</td>
+				<td>{{ form.je(class_="form-control", type="number") }}</td>
+			</tr>
+			<tr>
+				<td>Morse</td>
+				<td>{{ form.mc(class_="form-control", type="number") }}</td>
+			</tr>
+			<tr>
+				<td>Pierson</td>
+				<td>{{ form.pc(class_="form-control", type="number") }}</td>
+			</tr>
+			<tr>
+				<td>Silliman</td>
+				<td>{{ form.sm(class_="form-control", type="number") }}</td>
+			</tr>
+			<tr>
+				<td>Saybrook</td>
+				<td>{{ form.sy(class_="form-control", type="number") }}</td>
+			</tr>
+			<tr>
+				<td>Timothy Dwight</td>
+				<td>{{ form.td(class_="form-control", type="number") }}</td>
+			</tr>
+			<tr>
+				<td>Trumbull</td>
+				<td>{{ form.tc(class_="form-control", type="number") }}</td>
+			</tr>
+		</table>
+		<input type="submit" class="btn btn-default" value="Submit"></input>
+	</form>
+	<br>
+{% include 'yaleims/footer.html' %}

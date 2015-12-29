@@ -3,6 +3,7 @@ Flask-Blogging==0.5.0
 Flask-Cache==0.13.1
 Flask-Login==0.2.11
 Flask-Principal==0.4.0
+Flask-SQLAlchemy==2.1
 Flask-WTF==0.12
 Jinja2==2.7.3
 Markdown==2.6.5
@@ -17,7 +18,7 @@ oauth2client==1.5.1
 pyasn1==0.1.9
 pyasn1-modules==0.0.8
 pycrypto==2.6.1
-requests==2.8.1
+requests==2.5.3
 rsa==3.2
 six==1.10.0
 wsgiref==0.1.2
