@@ -52,6 +52,8 @@ def added_sports():
 
 @app.route("/yaleims/admin/", methods=['GET', 'POST'])
 def admin():
+	if not session.get('user'):
+		return redirect("/yaleims")
 	added_sports = Sport.query.all()
 	form = SportForm(request.form)
 	if request.method == 'POST':
