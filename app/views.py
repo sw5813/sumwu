@@ -77,11 +77,13 @@ def admin():
 			old_sport.sy = form.sy.data
 			old_sport.tc = form.tc.data
 			old_sport.td = form.td.data
+			db.session.commit()
+			return redirect("/yaleims/db_sport/" + form.sport.data)
 		elif form.action.data == "delete":
 			old_sport = Sport.query.filter_by(name=form.sport.data).first()
 			db.session.delete(old_sport)
-		db.session.commit()
-		flash('Admin action complete!')
+			db.session.commit()
+			return redirect("/yaleims")
 	return render_template('yaleims/admin.html', form=form, added_sports=added_sports)
 
 @app.route('/yaleims/', defaults={'page': "home", 'sport': ""})
