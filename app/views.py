@@ -14,12 +14,23 @@ def load_user(user_id):
 
 @app.route("/blog/login/", methods=['GET', 'POST'])
 def blog_login():
-	user = User("admin")
-	login_user(user)
-	return redirect("/blog")
+	if session.get('user') and session.get('user') == 'blog_admin':
+		return redirect("/blog")
+	form = LoginForm(request.form)
+	if request.method == 'POST':
+		if form.passcode.data == app.config['BLOG_PASS']:
+			session['user'] = 'blog_admin'
+			flash('Logged in successfully.')
+			user = User("admin")
+			login_user(user)
+			return redirect("/blog")
+		else:
+			flash('Incorrect passcode')
+	return render_template('blog_login.html', form=form)
 
 @app.route("/blog/logout/")
 def blog_logout():
+	session.pop('user', None)
 	logout_user()
 	return redirect("/blog")
 
@@ -135,7 +146,8 @@ def narwhals():
 
 @app.route('/v2')
 def v2():
-	return render_template('homev2.html')
+	projects = controllers.getProjects()
+	return render_template('homev2.html', projects=projects)
 
 @app.route('/blog')
 def blog():

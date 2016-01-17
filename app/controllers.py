@@ -187,6 +187,9 @@ def sport(sport):
 	sorted_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)
 	return sorted_scores
 
+def getProjects():
+	return {}
+
 def instagram():
 	client_id = os.environ['INSTAGRAM_CLIENT_ID']
 	insta_api = 'https://api.instagram.com/v1/'
