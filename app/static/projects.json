@@ -1,0 +1,50 @@
+[
+	{
+		"name": "Sharespot",
+		"description": "the anonymous marketplace for files",
+		"icon": "anon.ico",
+		"screenshot": "sharespot.png"
+	},
+	{
+		"name": "Dropdot",
+		"description": "a connect-the-dots game and puzzle creation tool",
+		"icon": "dropdot.ico",
+		"screenshot": ""
+	},
+	{
+		"name": "Yale Intramurals",
+		"description": "a redesign of the Yale Intramurals site",
+		"icon": "yaleims/img/yalefavicon.ico",
+		"screenshot": ""
+	},
+	{
+		"name": "Capital One Instagram Challenge",
+		"description": "Winning submission for gathering sentiment data for #capitalone on Instagram",
+		"icon": "capitalone.ico",
+		"screenshot": ""
+	},
+	{
+		"name": "Splitter",
+		"description": "",
+		"icon": "",
+		"screenshot": ""
+	},
+	{
+		"name": "Heartbeat",
+		"description": "a fitness app that plays music based on workout pace",
+		"icon": "heartbeat.ico",
+		"screenshot": ""
+	},
+	{
+		"name": "Habitar",
+		"description": "personal web avatars for developing habits",
+		"icon": "habitar.ico",
+		"screenshot": ""
+	},
+	{
+		"name": "uplYft",
+		"description": "raising campus morale through surprise acts of kindness",
+		"icon": "uplyft.ico",
+		"screenshot": ""
+	}
+]
