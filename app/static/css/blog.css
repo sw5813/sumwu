@@ -2,6 +2,21 @@
  * Globals
  */
 
+@font-face {
+  font-family: 'Chalkduster';
+  src: url(../fonts/Chalkduster.ttf);
+}
+
+@font-face {
+  font-family: 'Cambria';
+  src: url(../fonts/Cambria.ttf);
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url(../fonts/lato-light.ttf);
+}
+
 /* Links */
 a,
 a:focus,
@@ -46,7 +61,7 @@ img {
 /* Post styles */
 .title {
 	font-size: 3em;
-	font-family: 'Chalkduster';
+	font-family: 'Chalkduster', sans-serif;
 }
 .date {
 	color: #888;
