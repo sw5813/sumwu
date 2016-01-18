@@ -9,11 +9,10 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 
 # extensions for blog
-engine = create_engine('sqlite:////tmp/blog.db')
 meta = MetaData()
-sql_storage = SQLAStorage(engine, metadata=meta)
+sql_storage = SQLAStorage(db.engine, metadata=meta)
 blog_engine = BloggingEngine(app, sql_storage)
 login_manager = LoginManager(app)
-meta.create_all(bind=engine)
+meta.create_all(bind=db.engine)
 
 from app import views, models
