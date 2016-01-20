@@ -39,7 +39,7 @@ Summer Wu
         <!--<p>Posted by <a href="{{ url_for('blogging.posts_by_author', user_id=post.user_id)}}"><em>{{post.user_name}}</em></a>
         on {{post.post_date.strftime('%d %b, %Y')}}</p>-->
         <p class="date">{{post.post_date.strftime('%B %d, %Y')}}</p>
-        <p>{{post.text | safe | truncate(450)}} <a class="continue" href="{{ post.url }}">continue reading</a></p>
+        <p>{{post.rendered_text | striptags | truncate(450)}} <a class="continue" href="{{ post.url }}">continue reading</a></p>
         
         <!-- post tags-->
         {% if post.tags %}
