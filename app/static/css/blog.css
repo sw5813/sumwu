@@ -105,7 +105,8 @@ img {
 	width: 80%;
 	font-family: 'Lato';
 	font-size: 18px;
+	margin: auto;
 }
 input {
-	margin-top: 10px;
+	margin: 10px auto;
 }
