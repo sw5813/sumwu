@@ -27,6 +27,23 @@ a {
 	color: #00BCD4;
 }
 
+/* Buttons */
+.btn,
+.btn:focus,
+.btn:active {
+	font-size: 18px;
+	color: #00BCD4;
+	border-color: #00BCD4;
+	font-family: 'Lato';
+	font-weight: 'bold';
+	background-color: rgba(0, 0, 0, 0);
+}
+.btn:hover {
+	color: #00BCD4;
+	border-color: #00BCD4;
+	background-color: rgba(0, 188, 212, 0.05);
+}
+
 /*
  * Base structure
  */
@@ -81,4 +98,14 @@ img {
 }
 .blue {
 	color: #00BCD4;
+}
+
+/* Forms */
+.form-group {
+	width: 80%;
+	font-family: 'Lato';
+	font-size: 18px;
+}
+input {
+	margin-top: 10px;
 }
