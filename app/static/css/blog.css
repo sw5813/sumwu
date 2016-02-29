@@ -28,9 +28,9 @@ a {
 }
 
 /* Buttons */
-.btn,
-.btn:focus,
-.btn:active {
+.sleek-btn,
+.sleek-btn:focus,
+.sleek-btn:active {
 	font-size: 18px;
 	color: #00BCD4;
 	border-color: #00BCD4;
@@ -38,7 +38,7 @@ a {
 	font-weight: 'bold';
 	background-color: rgba(0, 0, 0, 0);
 }
-.btn:hover {
+.sleek-btn:hover {
 	color: #00BCD4;
 	border-color: #00BCD4;
 	background-color: rgba(0, 188, 212, 0.05);
@@ -101,12 +101,12 @@ img {
 }
 
 /* Forms */
-.form-group {
+.sleek-form {
 	width: 80%;
 	font-family: 'Lato';
 	font-size: 18px;
 	margin: auto;
 }
-input {
+.sleek-input {
 	margin: 10px auto;
 }
