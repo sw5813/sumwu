@@ -110,3 +110,25 @@ img {
 .sleek-input {
 	margin: 10px auto;
 }
+
+/* Post Carousel */
+.carousel-indicators li {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 5px;
+    text-indent: 0;
+    cursor: pointer;
+    border: solid #00BCD4 1px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+.carousel-indicators .active {
+    width: 24px;
+    height: 24px;
+    margin: 5px;
+    background-color: #00BCD4;
+}
+.carousel-indicators {
+  bottom:-50px;
+}
