@@ -20,8 +20,8 @@ def overall():
 	}
 
 	# Call kimono API
-	results = json.load(urllib2.urlopen("https://www.kimonolabs.com/api/5qxqpxj8?apikey=7b965rHdqqFqdp0McyJ3qkUGAQUoHXGx"))
-	json_scores = results["results"]["scores"]
+	results = json.load(urllib2.urlopen("https://sizzling-fire-1620.firebaseio.com/results.json"))
+	json_scores = results["scores"]
 
 	for i in range(90):
 		# Add to college totals
@@ -136,7 +136,7 @@ def sport(sport):
 	}
 
 	# Call kimono API
-	results = json.load(urllib2.urlopen("https://www.kimonolabs.com/api/" + kimono_ids[sport] + "?apikey=7b965rHdqqFqdp0McyJ3qkUGAQUoHXGx"))
+	results = json.load(urllib2.urlopen("https://sizzling-fire-1620.firebaseio.com/kimono/api/" + kimono_ids[sport] + "/latest.json"))
 	json_scores = results["results"]["scores"]
 
 	for i in range(len(json_scores)):
