@@ -115,7 +115,16 @@ def yaleims(page, sport):
 			"w_soccer": "Women's Soccer",
 			"c_tabletennis": "Coed Table Tennis",
 			"c_tennis": "Coed Tennis",
-			"c_volleyball": "Coed Volleyball"
+			"c_volleyball": "Coed Volleyball",
+			"w_squash": "Women's Squash",
+			"c_bowling": "Coed Bowling",
+			"a_hoops": "A Hoops",
+			"b_hoops": "B Hoops",
+			"c_hoops": "C Hoops",
+			"w_hoops": "Women's Hoops",
+			"c_hockey": "Coed Hockey",
+			"w_volleyball": "Women's Winter Volleyball",
+			"c_waterpolo": "Coed Waterpolo"
 		}
 		scores = controllers.sport(sport)
 		return render_template('yaleims/sport.html', sport_name=sport_names[sport], scores=scores)

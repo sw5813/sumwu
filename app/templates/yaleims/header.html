@@ -76,16 +76,15 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Winter Sports <span class="caret"></span></a>
               <ul class="dropdown-menu inverse-dropdown" role="menu">
-                <li><a href="#">Men's A-Hoops</a></li>
-                <li><a href="#">Men's B-Hoops</a></li>
-                <li><a href="#">Men's C-Hoops</a></li>
-                <li><a href="#">Women's Basketball</a></li>
-                <li><a href="#">Men's Indoor Volleyball</a></li>
-                <li><a href="#">Women's Indoor Volleyball</a></li>
-                <li><a href="#">Inner-Tube Water Polo</a></li>
-                <li><a href="#">Swimming</a></li>
-                <li><a href="#">Bowling</a></li>
-                <li><a href="#">Hockey</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='a_hoops') }}">Men's A-Hoops</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='b_hoops') }}">Men's B-Hoops</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='c_hoops') }}">Men's C-Hoops</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='w_hoops') }}">Women's Basketball</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='w_volleyball') }}">Women's Volleyball</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='w_squash') }}">Women's Squash</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='c_waterpolo') }}">Inner-Tube Water Polo</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='c_bowling') }}">Bowling</a></li>
+                <li><a href="{{ url_for('yaleims', page='sport', sport='c_hockey') }}">Hockey</a></li>
                 {% for add_sport in winter_sports %}
                 <li><a href="{{ url_for('yaleims', page='db_sport', sport=add_sport.name) }}">{{ add_sport.name }}</a></li>
                 {% endfor %}

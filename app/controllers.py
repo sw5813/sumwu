@@ -20,19 +20,37 @@ def overall():
 	}
 
 	# Call kimono API
-	results = json.load(urllib2.urlopen("https://sizzling-fire-1620.firebaseio.com/results.json"))
-	json_scores = results["scores"]
+	# results = json.load(urllib2.urlopen("https://sizzling-fire-1620.firebaseio.com/results.json"))
+	# json_scores = results["scores"]
 
-	for i in range(90):
+	results = json.load(urllib2.urlopen("https://api.import.io/store/connector/635dd6b4-4385-46f7-9e3a-ae0642483b96/_query?input=webpage/url:http%3A%2F%2Frender.import.io%2F%3Furl%3Dhttps%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1Dh54hH2GNdkL3SZrUi6e26TKS8hXu1gO5qnnTwrl3Lo%2Fpubhtml&&_apikey=b5595078310a443994942424fd0d17d8b030dd586a8c4a37e155e7436f3f73b0a42c2a94fa76a60fcacb46246436d09c4d2ab8a6ebdaea5332d19c89b9a8a01f79ba88dfb3163def3d1b504c84dbde1f"))
+	json_scores = results["results"]
+
+	for i in range(len(json_scores)):
 		# Add to college totals
-		sport = json_scores[i]["api"]
+		# Catch exceptions when import.io isn't consistent
+		if not json_scores[i].has_key("team"):
+			continue
+
 		college_name = json_scores[i]["team"]
+
+		# Filter out import.io thing
+		if college_name == "team":
+			continue
+
+		sport = json_scores[i]["sport"] #api for firebase/kimono
 		wins = float(json_scores[i]["wins"])
 		ties = float(json_scores[i]["ties"])
 
 		# Determine full_team_size
 		full_team_size = 0
-		if sport == "c_football" or sport == "m_football":
+		if sport == "w_squash":
+			full_team_size = 3
+		elif sport == "c_bowling":
+			full_team_size = 4
+		elif sport == "a_hoops" or sport == "b_hoops" or sport == "c_hoops" or sport == "w_hoops":
+			full_team_size = 5
+		elif sport == "c_football" or sport == "m_football" or sport == "c_hockey" or sport == "w_volleyball" or sport == "c_waterpolo":
 			full_team_size = 6
 		elif sport == "c_soccer" or sport == "m_soccer" or sport == "w_soccer":
 			full_team_size = 11
@@ -124,22 +142,34 @@ def sport(sport):
 		"Pierson":0
 	}
 
-	kimono_ids = {
-		"w_soccer": "4gfpvl6w",
-		"c_football": "8excyibu",
-		"c_tennis": "2q1qdvcy",
-		"c_tabletennis": "dhat65ri",
-		"m_football": "a6i2zx3i",
-		"m_soccer": "c9bbtr10",
-		"c_soccer": "csg6u8yq",
-		"c_volleyball": "5d49y3kc"
-	}
+	# kimono_ids = {
+	# 	"w_soccer": "4gfpvl6w",
+	# 	"c_football": "8excyibu",
+	# 	"c_tennis": "2q1qdvcy",
+	# 	"c_tabletennis": "dhat65ri",
+	# 	"m_football": "a6i2zx3i",
+	# 	"m_soccer": "c9bbtr10",
+	# 	"c_soccer": "csg6u8yq",
+	# 	"c_volleyball": "5d49y3kc"
+	# }
 
-	# Call kimono API
-	results = json.load(urllib2.urlopen("https://sizzling-fire-1620.firebaseio.com/kimono/api/" + kimono_ids[sport] + "/latest.json"))
-	json_scores = results["results"]["scores"]
+	# # Call kimono API
+	# results = json.load(urllib2.urlopen("https://sizzling-fire-1620.firebaseio.com/kimono/api/" + kimono_ids[sport] + "/latest.json"))
+	# json_scores = results["results"]["scores"]
+
+	results = json.load(urllib2.urlopen("https://api.import.io/store/connector/635dd6b4-4385-46f7-9e3a-ae0642483b96/_query?input=webpage/url:http%3A%2F%2Frender.import.io%2F%3Furl%3Dhttps%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1Dh54hH2GNdkL3SZrUi6e26TKS8hXu1gO5qnnTwrl3Lo%2Fpubhtml&&_apikey=b5595078310a443994942424fd0d17d8b030dd586a8c4a37e155e7436f3f73b0a42c2a94fa76a60fcacb46246436d09c4d2ab8a6ebdaea5332d19c89b9a8a01f79ba88dfb3163def3d1b504c84dbde1f"))
+	json_scores = results["results"]
 
 	for i in range(len(json_scores)):
+		# Filter out sports not currently being queried
+		sport_name = json_scores[i]["sport"]
+		if sport_name != sport:
+			continue
+
+		# Compesate for import.io slowness
+		if not json_scores[i].has_key("team"):
+			continue
+
 		# Add to college totals
 		college_name = json_scores[i]["team"]
 		wins = float(json_scores[i]["wins"])
@@ -147,7 +177,13 @@ def sport(sport):
 
 		# Determine full_team_size
 		full_team_size = 0
-		if sport == "c_football" or sport == "m_football":
+		if sport == "w_squash":
+			full_team_size = 3
+		elif sport == "c_bowling":
+			full_team_size = 4
+		elif sport == "a_hoops" or sport == "b_hoops" or sport == "c_hoops" or sport == "w_hoops":
+			full_team_size = 5
+		elif sport == "c_football" or sport == "m_football" or sport == "c_hockey" or sport == "w_volleyball" or sport == "c_waterpolo":
 			full_team_size = 6
 		elif sport == "c_soccer" or sport == "m_soccer" or sport == "w_soccer":
 			full_team_size = 11
