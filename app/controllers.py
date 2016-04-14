@@ -20,47 +20,38 @@ def overall():
 	}
 
 	# Call kimono API
-	# results = json.load(urllib2.urlopen("https://sizzling-fire-1620.firebaseio.com/results.json"))
-	# json_scores = results["scores"]
+	results = json.load(urllib2.urlopen("https://sizzling-fire-1620.firebaseio.com/kimono/api/c01pdz04/latest.json"))
+	json_scores = results["results"]["scores"]
 
-	results = json.load(urllib2.urlopen("https://api.import.io/store/connector/635dd6b4-4385-46f7-9e3a-ae0642483b96/_query?input=webpage/url:http%3A%2F%2Frender.import.io%2F%3Furl%3Dhttps%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1Dh54hH2GNdkL3SZrUi6e26TKS8hXu1gO5qnnTwrl3Lo%2Fpubhtml&&_apikey=b5595078310a443994942424fd0d17d8b030dd586a8c4a37e155e7436f3f73b0a42c2a94fa76a60fcacb46246436d09c4d2ab8a6ebdaea5332d19c89b9a8a01f79ba88dfb3163def3d1b504c84dbde1f"))
-	json_scores = results["results"]
-
-	for i in range(len(json_scores)):
+	sport = ""
+	for i in range(results["count"]):
 		# Add to college totals
-		# Catch exceptions when import.io isn't consistent
-		if not json_scores[i].has_key("team"):
-			continue
+		if json_scores[i].has_key("sport"):
+			sport = json_scores[i]["sport"]
 
 		college_name = json_scores[i]["team"]
-
-		# Filter out import.io thing
-		if college_name == "team":
-			continue
-
-		sport = json_scores[i]["sport"] #api for firebase/kimono
 		wins = float(json_scores[i]["wins"])
 		ties = float(json_scores[i]["ties"])
 
 		# Determine full_team_size
 		full_team_size = 0
-		if sport == "w_squash":
+		if sport == "Women's Squash":
 			full_team_size = 3
-		elif sport == "c_bowling":
+		elif sport == "Coed Bowling":
 			full_team_size = 4
-		elif sport == "a_hoops" or sport == "b_hoops" or sport == "c_hoops" or sport == "w_hoops":
+		elif sport == "A Hoops" or sport == "B Hoops" or sport == "C Hoops" or sport == "W Hoops":
 			full_team_size = 5
-		elif sport == "c_football" or sport == "m_football" or sport == "c_hockey" or sport == "w_volleyball" or sport == "c_waterpolo":
+		elif sport == "Coed Football" or sport == "Men's Football" or sport == "Coed Ice Hockey" or sport == "Women's Winter" or sport == "Coed Waterpolo":
 			full_team_size = 6
-		elif sport == "c_soccer" or sport == "m_soccer" or sport == "w_soccer":
+		elif sport == "Fall Coed Soccer" or sport == "Men's Soccer" or sport == "Women's Soccer":
 			full_team_size = 11
-		elif sport == "c_tabletennis" or sport == "c_tennis":
+		elif sport == "Coed Table Tennis" or sport == "Coed Tennis":
 			full_team_size = 10
-		elif sport == "c_volleyball":
+		elif sport == "Fall Outdoor":
 			full_team_size = 6
 
 		# Exception for women's soccer since each team has two colleges
-		if sport == "w_soccer":
+		if sport == "Women's Soccer":
 			college1 = ""
 			college2 = ""
 			if college_name == "BK-ES":
@@ -142,82 +133,69 @@ def sport(sport):
 		"Pierson":0
 	}
 
-	# kimono_ids = {
-	# 	"w_soccer": "4gfpvl6w",
-	# 	"c_football": "8excyibu",
-	# 	"c_tennis": "2q1qdvcy",
-	# 	"c_tabletennis": "dhat65ri",
-	# 	"m_football": "a6i2zx3i",
-	# 	"m_soccer": "c9bbtr10",
-	# 	"c_soccer": "csg6u8yq",
-	# 	"c_volleyball": "5d49y3kc"
-	# }
+	# Call kimono API
+	results = json.load(urllib2.urlopen("https://sizzling-fire-1620.firebaseio.com/kimono/api/c01pdz04/latest.json"))
+	json_scores = results["results"]["scores"]
 
-	# # Call kimono API
-	# results = json.load(urllib2.urlopen("https://sizzling-fire-1620.firebaseio.com/kimono/api/" + kimono_ids[sport] + "/latest.json"))
-	# json_scores = results["results"]["scores"]
+	for i in range(results["count"]):
+		# Only add score for queried sport
+		if json_scores[i].has_key("sport") and json_scores[i]["sport"] == sport:
+			print "found it: " + json_scores[i]["sport"] 
+			# Add scores until the next sport is found
+			while i < results["count"] and ((json_scores[i].has_key("sport") and json_scores[i]["sport"] == sport) or not json_scores[i].has_key("sport")):
+				# Add to college totals
+				college_name = json_scores[i]["team"]
+				wins = float(json_scores[i]["wins"])
+				ties = float(json_scores[i]["ties"])
 
-	results = json.load(urllib2.urlopen("https://api.import.io/store/connector/635dd6b4-4385-46f7-9e3a-ae0642483b96/_query?input=webpage/url:http%3A%2F%2Frender.import.io%2F%3Furl%3Dhttps%3A%2F%2Fdocs.google.com%2Fspreadsheets%2Fd%2F1Dh54hH2GNdkL3SZrUi6e26TKS8hXu1gO5qnnTwrl3Lo%2Fpubhtml&&_apikey=b5595078310a443994942424fd0d17d8b030dd586a8c4a37e155e7436f3f73b0a42c2a94fa76a60fcacb46246436d09c4d2ab8a6ebdaea5332d19c89b9a8a01f79ba88dfb3163def3d1b504c84dbde1f"))
-	json_scores = results["results"]
+				# Determine full_team_size
+				full_team_size = 0
+				if sport == "Women's Squash":
+					full_team_size = 3
+				elif sport == "Coed Bowling":
+					full_team_size = 4
+				elif sport == "A Hoops" or sport == "B Hoops" or sport == "C Hoops" or sport == "W Hoops":
+					full_team_size = 5
+				elif sport == "Coed Football" or sport == "Men's Football" or sport == "Coed Ice Hockey" or sport == "Women's Winter" or sport == "Coed Waterpolo":
+					full_team_size = 6
+				elif sport == "Fall Coed Soccer" or sport == "Men's Soccer" or sport == "Women's Soccer":
+					full_team_size = 11
+				elif sport == "Coed Table Tennis" or sport == "Coed Tennis":
+					full_team_size = 10
+				elif sport == "Fall Outdoor":
+					full_team_size = 6
 
-	for i in range(len(json_scores)):
-		# Filter out sports not currently being queried
-		sport_name = json_scores[i]["sport"]
-		if sport_name != sport:
-			continue
+				# Exception for women's soccer since each team has two colleges
+				if sport == "Women's Soccer":
+					college1 = ""
+					college2 = ""
+					if college_name == "BK-ES":
+						college1 = "Berkeley"
+						college2 = "Ezra Stiles"
+					elif college_name == "PC-TC":
+						college1 = "Pierson"
+						college2 = "Trumbull"
+					elif college_name == "MC-SY":
+						college1 = "Morse"
+						college2 = "Saybrook"
+					elif college_name == "TD-SM":
+						college1 = "Timothy Dwight"
+						college2 = "Silliman"
+					elif college_name == "JE-BR":
+						college1 = "Jonathan Edwards"
+						college2 = "Branford"
+					elif college_name == "DC-CC":
+						college1 = "Davenport"
+						college2 = "Calhoun"
+					scores[college1] += (wins + ties*0.5)*full_team_size
+					scores[college2] += (wins + ties*0.5)*full_team_size
+				else:
+					scores[college_name] += (wins + ties*0.5)*full_team_size
 
-		# Compesate for import.io slowness
-		if not json_scores[i].has_key("team"):
-			continue
+				i += 1
 
-		# Add to college totals
-		college_name = json_scores[i]["team"]
-		wins = float(json_scores[i]["wins"])
-		ties = float(json_scores[i]["ties"])
-
-		# Determine full_team_size
-		full_team_size = 0
-		if sport == "w_squash":
-			full_team_size = 3
-		elif sport == "c_bowling":
-			full_team_size = 4
-		elif sport == "a_hoops" or sport == "b_hoops" or sport == "c_hoops" or sport == "w_hoops":
-			full_team_size = 5
-		elif sport == "c_football" or sport == "m_football" or sport == "c_hockey" or sport == "w_volleyball" or sport == "c_waterpolo":
-			full_team_size = 6
-		elif sport == "c_soccer" or sport == "m_soccer" or sport == "w_soccer":
-			full_team_size = 11
-		elif sport == "c_tabletennis" or sport == "c_tennis":
-			full_team_size = 10
-		elif sport == "c_volleyball":
-			full_team_size = 6
-
-		# Exception for women's soccer since each team has two colleges
-		if sport == "w_soccer":
-			college1 = ""
-			college2 = ""
-			if college_name == "BK-ES":
-				college1 = "Berkeley"
-				college2 = "Ezra Stiles"
-			elif college_name == "PC-TC":
-				college1 = "Pierson"
-				college2 = "Trumbull"
-			elif college_name == "MC-SY":
-				college1 = "Morse"
-				college2 = "Saybrook"
-			elif college_name == "TD-SM":
-				college1 = "Timothy Dwight"
-				college2 = "Silliman"
-			elif college_name == "JE-BR":
-				college1 = "Jonathan Edwards"
-				college2 = "Branford"
-			elif college_name == "DC-CC":
-				college1 = "Davenport"
-				college2 = "Calhoun"
-			scores[college1] += (wins + ties*0.5)*full_team_size
-			scores[college2] += (wins + ties*0.5)*full_team_size
-		else:
-			scores[college_name] += (wins + ties*0.5)*full_team_size
+			# Exit loop
+			break
 
 	# Sort colleges by rank, display in table
 	sorted_scores = sorted(scores.items(), key=operator.itemgetter(1), reverse=True)

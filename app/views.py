@@ -110,23 +110,23 @@ def yaleims(page, sport):
 		sport_names = {
 			"c_football": "Coed Football",
 			"m_football": "Men's Football",
-			"c_soccer": "Coed Soccer",
+			"c_soccer": "Fall Coed Soccer",
 			"m_soccer": "Men's Soccer",
 			"w_soccer": "Women's Soccer",
 			"c_tabletennis": "Coed Table Tennis",
 			"c_tennis": "Coed Tennis",
-			"c_volleyball": "Coed Volleyball",
+			"c_volleyball": "Fall Outdoor",
 			"w_squash": "Women's Squash",
 			"c_bowling": "Coed Bowling",
 			"a_hoops": "A Hoops",
 			"b_hoops": "B Hoops",
 			"c_hoops": "C Hoops",
-			"w_hoops": "Women's Hoops",
-			"c_hockey": "Coed Hockey",
-			"w_volleyball": "Women's Winter Volleyball",
+			"w_hoops": "W Hoops",
+			"c_hockey": "Coed Ice Hockey",
+			"w_volleyball": "Women's Winter",
 			"c_waterpolo": "Coed Waterpolo"
 		}
-		scores = controllers.sport(sport)
+		scores = controllers.sport(sport_names[sport])
 		return render_template('yaleims/sport.html', sport_name=sport_names[sport], scores=scores)
 	elif page == "db_sport":
 		scores = controllers.db_sport(sport)
