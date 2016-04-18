@@ -12,7 +12,7 @@ $(window).load(function(){
 	var full_url = pathvalue + qvalue;
 	$(".category").each(function(){
 		if ($(this).attr('href') == full_url) { 
-			$(this).addClass("active");
+			$(this).addClass("active_cat");
 		}
 	});
 });
