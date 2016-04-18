@@ -38,7 +38,7 @@
     </title>
 </head>
 <body>
-    {% if request.path != "/blog/" %}
+    {% if request.path != "/blog/" and request.path.split('/')[3] != 'tech' and request.path.split('/')[3] != 'travel'%}
     <!-- navbar header -->
     <div class="navbar navbar-fixed-top">
         <div class="container">

@@ -9,7 +9,11 @@ Summer Wu
             <strong>{{ alert.type }}</strong> {{ alert.message }}
         </div>
     {% endif %}
-    {% if request.path == "/blog/" %}
+
+    {% if request.path.split('/')[2] == 'tag' and request.path.split('/')[3] != 'tech' and request.path.split('/')[3] != 'travel' %}
+    <h1>Tag: {{ request.path.split('/')[3]  }}</h1>
+    <br>
+    {% else %}
     <div class="text-center inline">
         <a href="/blog">
             <img onmouseover="this.src='{{ url_for('static', filename='img/bridge_head.jpg') }}'" onmouseout="this.src='{{ url_for('static', filename='img/bud_head.jpg') }}'" src="{{ url_for('static', filename='img/summerhead.png') }}" class="img-circle" style="margin:auto" />
@@ -47,10 +51,17 @@ Summer Wu
         </div>
 
     </div>
-    {% elif request.path.split('/')[2] == 'tag' %}
-    <h1>Tag: {{ request.path.split('/')[3]  }}</h1>
-    {% endif %}
+
     <br>
+
+    <!-- Category bar -->
+    <div>
+        <a class="category" href="{{ url_for('blogging.index') }}">All</a>
+        <a class="category" href="{{ url_for('blogging.posts_by_tag', tag='travel', count=10, offset=0) }}">Travel</a>
+        <a class="category" href="{{ url_for('blogging.posts_by_tag', tag='tech', count=10, offset=0) }}">Tech</a>
+    </div>
+    {% endif %}
+
     <hr>
 
     {% if meta.is_user_blogger %}
