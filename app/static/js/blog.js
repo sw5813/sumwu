@@ -16,6 +16,7 @@ $(window).load(function(){
 	for (var i = 0; i < patharray.length; i++) {
 		if (!isNaN(parseFloat(patharray[i]))) {
 			patharray.splice(i, 1);
+			i--;
 		}
 	}
 	var newpath = patharray.join('\/');
