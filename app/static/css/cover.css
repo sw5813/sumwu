@@ -22,8 +22,6 @@ body {
 body {
   color: #fff;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  box-shadow: inset 0 0 100px rgba(0,0,0,.5);
 }
 
 /* Project names */
@@ -65,7 +63,6 @@ a.project {
 
 .cover {
   padding: 20px;
-  background-color: rgba(0, 0, 0, 0.74902);
   border-radius: 3px;
   text-align: left;
 }
@@ -81,6 +78,10 @@ h1 {
 }
 
 /* social media icons */
+.social-background {
+  background-image: url(../img/sandfooter.jpg);
+  height: 80px;
+}
 .social {
     width: calc(50% + 86px);
     height: 48px;
@@ -146,9 +147,13 @@ h1 {
   .cover {
     margin-left: 320px;
     margin-right: -170px;
+    background-color: rgba(0, 0, 0, 0.74902);
   }
   .social {
     width: calc(100%);
+  }
+  .social-background {
+    background-image: none;
   }
   body {
     background-image: url(../img/background.jpg);
