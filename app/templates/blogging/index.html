@@ -18,7 +18,7 @@ Summer Wu
         <a href="/blog">
             <img onmouseover="this.src='{{ url_for('static', filename='img/bridge_head.jpg') }}'" onmouseout="this.src='{{ url_for('static', filename='img/bud_head.jpg') }}'" src="{{ url_for('static', filename='img/summerhead.png') }}" class="img-circle" style="margin:auto" />
             <h1 class="title">Summer <span class="blue">Wu</span></h1>
-            <p class="description">Hello from Hong Kong!</p>
+            <p class="description">Hello from New Haven!</p>
         </a>
 
         <div>
@@ -73,27 +73,29 @@ Summer Wu
     {% endif %}
 
     {% for post in posts %}
-        <a href="{{ post.url }}">
-            <h1>{{ post.title }}</h1>
-        </a>
-        <!--<p>Posted by <a href="{{ url_for('blogging.posts_by_author', user_id=post.user_id)}}"><em>{{post.user_name}}</em></a>
-        on {{post.post_date.strftime('%d %b, %Y')}}</p>-->
-        <p class="date">{{post.post_date.strftime('%B %d, %Y')}}</p>
-        <p>{{post.rendered_text | striptags | truncate(450)}} <a class="continue" href="{{ post.url }}">continue reading</a></p>
-        
-        <!-- post tags-->
-        {% if post.tags %}
-            <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;
-            {% for tag in post.tags %}
-                <span class="label">
-                    <a href="{{ url_for('blogging.posts_by_tag', tag=tag.lower(), count=10, offset=0) }}">
-                    {{ tag }}
-                    </a>
-                </span>&nbsp;&nbsp;
-            {% endfor %}
-            <br>
+        {% if post.tags and "PRIVATE" not in post.tags %}
+            <a href="{{ post.url }}">
+                <h1>{{ post.title }}</h1>
+            </a>
+            <!--<p>Posted by <a href="{{ url_for('blogging.posts_by_author', user_id=post.user_id)}}"><em>{{post.user_name}}</em></a>
+            on {{post.post_date.strftime('%d %b, %Y')}}</p>-->
+            <p class="date">{{post.post_date.strftime('%B %d, %Y')}}</p>
+            <p>{{post.rendered_text | striptags | truncate(450)}} <a class="continue" href="{{ post.url }}">continue reading</a></p>
+            
+            <!-- post tags-->
+            {% if post.tags %}
+                <span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;
+                {% for tag in post.tags %}
+                    <span class="label">
+                        <a href="{{ url_for('blogging.posts_by_tag', tag=tag.lower(), count=10, offset=0) }}">
+                        {{ tag }}
+                        </a>
+                    </span>&nbsp;&nbsp;
+                {% endfor %}
+                <br>
+            {% endif %}
+            <hr>
         {% endif %}
-        <hr>
     {% endfor %}
     {% if ((meta)  and (meta.max_pages>1)) %}
         <div class="row">
