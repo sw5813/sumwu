@@ -141,10 +141,6 @@ def yaleims(page, sport):
 def index():
     return render_template('index.html')
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
-
 @app.route('/habitar')
 def habitar():
 	return render_template('habitar/index.html')
