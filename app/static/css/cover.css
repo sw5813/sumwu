@@ -68,7 +68,6 @@ h5 {
 }
 .lead {
   font-size: 22px;
-  font-weight: 500;
 }
 
 /* Cards */
@@ -77,9 +76,11 @@ h5 {
 }
 
 /* social media icons */
+.right {
+  text-align: center;
+}
 .social {
-  overflow: auto;
-  margin-left: calc(20%);
+  display: inline-block;
 }
 .social-popout {
   height: 48px;
@@ -128,9 +129,8 @@ h5 {
   .lead {
     font-size: 20px;
   }
-  .social {
-    overflow: auto;
-    margin-left: 0px;
+  .right {
+    text-align: left;
   }
 }
 
