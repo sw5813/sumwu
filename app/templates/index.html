@@ -4,20 +4,21 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Summer's Personal Site">
+    <meta name="description" content="Summer's Homepage">
     <meta name="author" content="Summer Wu">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}" />
 
     <title>Summer Wu</title>
 
     <!-- Bootstrap core CSS -->
-    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
     <!-- Custom styles for this template -->
     <link href="{{ url_for('static', filename='css/cover.css') }}" rel="stylesheet">
 
     <!-- Font is Montserrat -->
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -31,44 +32,96 @@
 
   <body>
 
-    <div class="site-wrapper">
-
-      <div class="site-wrapper-inner">
-
-        <div class="cover-container">
-          <img class="visible-xs" src="{{ url_for('static', filename='img/xs_image.jpg') }}">
-          <img class="visible-sm" src="{{ url_for('static', filename='img/sm_image.jpg') }}">
-
-          <div class="inner cover">
-            <h1 class="cover-heading">Summer Wu</h1>
-            <p class="lead">PM @ Microsoft HoloLens</p>
-            <hr>
-
-            <h4>About Me</h4>
-              <p>I'm fascinated by mixed reality and excited about its potential to transform people's lives. I aspire to create products that will contribute to a more ethical, sustainable, and equitable future.</p>
-
-              <p>When I'm not tinkering with holograms, I'm likely learning a new language, training for my next marathon, or curled up with a good book!</p>
-              
-              <p>
-                Although lately it's been neglected, I sometimes <a style="font-weight: bold" href="{{ url_for('blog') }}">*blog*</a> about the places I visit. 
-              </p>
-
-            <hr>
-            <a href="{{ url_for('static', filename='summer_wu_resume.pdf') }}"> &#10095; Resume (pdf)</a>
-          </div>
-    
-          <div class="social-background">
-            <div class="social">
-              <div class="social-popout"><a href="https://twitter.com/summerwoohoo"><img src="{{ url_for('static', filename='img/twitter.png') }}" /></a></div>
-              <div class="social-popout"><a href="https://github.com/sw5813"><img src="{{ url_for('static', filename='img/github.jpg') }}" /></a></div>
-              <div class="social-popout"><a href="https://www.linkedin.com/pub/summer-wu/80/b29/7ab"><img src="{{ url_for('static', filename='img/linkedin.png') }}" /></a></div>
-              <div class="social-popout"><a href="mailto:summer.wu82@gmail.com"><img src="{{ url_for('static', filename='img/email.png') }}" /></a></div>
+        <div class="container" id="site-container">
+          <div class="row">
+            <div class="col-md-4">
+              <img class="img-fluid rounded-circle shadow" onmouseover="this.src='{{ url_for('static', filename='img/hl2head.png') }}'" onmouseout="this.src='{{ url_for('static', filename='img/summerhead.png') }}'" src="{{ url_for('static', filename='img/summerhead.png') }}" />
             </div>
+            <div class="col-md-8">
+
+              <div class="inner cover">
+                <h1>Hi, I'm Summer</h1>
+                
+                <hr>
+                <p class="lead">Mixed Reality Enthusiast, Distance Runner</p>
+
+                <p>I’m a builder at heart; equipped with a background in computer science, I aspire to contribute towards a future that delights, amazes, and is accessible to all.</p>
+
+                <p>
+                  At Microsoft, my team is building a mixed reality platform that enables our users (<a href="https://aka.ms/24h">surgeons</a>, <a href="https://news.microsoft.com/transform/vroom-with-a-view-hololens-2-powers-faster-fixes-mercedes-benz-usa/">field technicians</a>, <a href="https://news.microsoft.com/innovation-stories/hololens-2-nasa-orion-artemis/">assembly workers</a>, and so many more) to do their jobs better.
+
+                  <!-- Toggle projects section to reduce text-->
+                  <a data-bs-toggle="collapse" href="#projects" role="button" aria-expanded="false" aria-controls="projects">
+                    More on my work
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+                      <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                    </svg>
+                  </a>
+                </p>
+
+                <!-- Projects section (hidden by default) -->
+                <div class="collapse mb-3" id="projects">
+                  I'm leading the effort to bring <a href="https://docs.microsoft.com/en-us/windows/mixed-reality/develop/unreal/unreal-development-overview?tabs=ue426%2Cmrtk%2Casa">HoloLens 2 support to Unreal Engine</a>, and have recently begun looking into how we can further democratize mixed reality development beyond game engines. Here are some highlights: 
+
+                    <div class="row">
+
+                      <div class="card col-lg m-2 p-0">
+                        <a href="https://channel9.msdn.com/Shows/Mixed-Reality/Intro-to-Unreal--MRTK-for-HoloLens-2">
+                          <img src="{{ url_for('static', filename='img/MRDD.png') }}" class="card-img-top" alt="Mixed Reality Dev Days 2020 in AltspaceVR">
+                        </a>
+                        <div class="card-body">
+                          <h5 class="card-title">MR Dev Days 2020</h5>
+                          <p class="card-text">After HoloLens 2 support in UE4 achieved <a href="https://www.roadtovr.com/unreal-engine-4-25-hololens-2-magic-leap-azure-spatial-anchors/">production-ready</a> status in May '20, I gave this talk on how to get started on the platform at Microsoft's annual MR developer conference.</p>
+                        </div>
+                      </div>
+
+                      <div class="card col-lg m-2 p-0">
+                        <a href="http://aka.ms/mrtk-unreal">
+                          <img src="{{ url_for('static', filename='img/mrtk.png') }}" class="card-img-top" alt="Mixed Reality Toolkit for Unreal Hand Menu">
+                        </a>
+                        <div class="card-body">
+                          <h5 class="card-title">Mixed Reality Toolkit</h5>
+                          <p class="card-text">My team shipped the <a href="http://aka.ms/uxt-unreal">UX Tools</a> plugin in May '20 and continues to ship an update every two months. The <a href="https://github.com/microsoft/MixedReality-GraphicsTools-Unreal">Graphics Tools</a> plugin was released in Jan '20, and a third plugin is on the way.</p>
+                        </div>
+                      </div>
+
+                      <div class="card col-lg m-2 p-0">
+                        <a href="https://docs.microsoft.com/en-us/windows/mixed-reality/develop/unreal/unreal-kippys-escape">
+                          <img src="{{ url_for('static', filename='img/kippy.jpg') }}" class="card-img-top" alt="Kippy the robot">
+                        </a>
+                        <div class="card-body">
+                          <h5 class="card-title">Kippy's Escape</h5>
+                          <p class="card-text">A HoloLens 2 puzzle game I produced, originally intended as a booth demo for GDC 2020. It's now <a href="https://github.com/microsoft/MixedReality-Unreal-KippysEscape">open source</a> and available for download from the <a href="https://www.microsoft.com/p/kippys-escape/9nbd7gl86vkd">Microsoft Store</a>.</p>
+                        </div>
+                      </div>
+
+                    </div>
+
+                </div>
+
+                <p>I'm always on the look out for new ideas, projects, and opportunities in the AR/VR space- have a project you want to discuss or collaborate on? Let's <a href="mailto:summer.wu82@gmail.com">connect</a>!</p>
+
+                <p>If I'm not tinkering with holograms, I'm likely brushing up on my Mandarin, training for a marathon (I ran my first <a href="https://raceday.enmotive.com/#/events/iron-horse-half-marathon/registrants/5d52fd5d-68d4-4fc1-bbc0-597d5206f5f9">half</a> in 2019), or curled up with a book (sci-fi, biographies/memoirs).</p>
+                
+                <p>
+                  Although lately it's been neglected, I sometimes <a href="{{ url_for('blog') }}">blog</a> about the places I visit. 
+                </p>
+
+                <hr>
+                <a href="{{ url_for('static', filename='summer_wu_resume.pdf') }}"> &#10095; Resume (pdf)</a>
+              </div>
+              
+              <div class="social">
+                <div class="social-popout"><a href="https://twitter.com/summerwoohoo"><img src="{{ url_for('static', filename='img/twitter.png') }}" /></a></div>
+                <div class="social-popout"><a href="https://github.com/sw5813"><img src="{{ url_for('static', filename='img/github.jpg') }}" /></a></div>
+                <div class="social-popout"><a href="https://www.linkedin.com/pub/summer-wu/80/b29/7ab"><img src="{{ url_for('static', filename='img/linkedin.png') }}" /></a></div>
+                <div class="social-popout"><a href="mailto:summer.wu82@gmail.com"><img src="{{ url_for('static', filename='img/email.png') }}" /></a></div>
+              </div>
+
+            </div>
+
           </div>
 
-        </div>
-
-      </div>
 
     </div>
 
@@ -76,6 +129,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
   </body>
 </html>
