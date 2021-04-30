@@ -20,7 +20,7 @@ pyasn1-modules==0.0.8
 pycrypto==2.6.1
 psycopg2==2.8.6
 requests==2.20.0
-rsa==3.2
+rsa==4.7.1
 six==1.10.0
 wsgiref==0.1.2
 gunicorn==19.5.0
